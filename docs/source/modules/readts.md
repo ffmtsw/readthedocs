@@ -8,7 +8,9 @@ ReadTS is a **viewer and lightweight QC tool** for time series. It focuses on:
 - Applying **basic filters** for quick inspection (LP/HP/notch).
 - Exporting figures and sending data to the MATLAB Workspace.
 
+
 ----
+
 
 ## Main features
 
@@ -69,7 +71,9 @@ Currently supported instruments/formats:
   - Reset only the time series to the original loaded backup
   - Reset the entire window/GUI
 
+
 ----
+
 
 ## Main GUI components (quick map)
 
@@ -110,7 +114,9 @@ Right-click on the plot panel to access quick scaling helpers:
 - **E-channels → Same as Ex / Same as Ey**
 - **B-channels → Same as Bx / Same as By / Same as Bz**
 
+
 ----
+
 
 ## Load data
 
@@ -166,7 +172,9 @@ If a station fails to merge, it usually indicates a structural mismatch in the r
 The error dialog displays the MATLAB report to help debugging.
 ```
 
+
 ----
+
 
 ## Navigate & inspect
 
@@ -192,7 +200,9 @@ The error dialog displays the MATLAB report to help debugging.
 - Next: add one window length.
 - ReadTS automatically clamps to the global bounds (no out-of-range indexing).
 
+
 ----
+
 
 ## Plot modes
 
@@ -228,7 +238,9 @@ Frequency-domain plot uses the displayed chunk length. Shorter windows increase 
 Spectrograms are excellent for identifying transient interference that does not show up clearly in a single averaged spectrum.
 ```
 
+
 ----
+
 
 ## Filtering
 
@@ -253,7 +265,9 @@ Because filtering uses `filtfilt`, short chunks or strong discontinuities can cr
 If you see weird boundary behavior, increase the window length or check the raw signal.
 ```
 
+
 ----
+
 
 ## Export
 
@@ -279,7 +293,9 @@ Menu: **Export → ts to Workspace**
 - Exposes your active `ts` structure as a variable named `ts` in the MATLAB base workspace.
 - Useful for quick scripting after inspection.
 
+
 ----
+
 
 ## Reset behavior
 
@@ -292,7 +308,9 @@ Menu: **File → Reset**
 Reset is designed for fast “try again” cycles when you test filters and want to revert instantly to the original signals.
 ```
 
+
 ----
+
 
 ## Quick start (step-by-step tutorials)
 
@@ -388,6 +406,10 @@ The PNG export creates a temporary docked figure you can resize before saving, t
 
 - Click **Info** (toolbar) to open station information (sampling rate, instrument fields, etc.).
 - Click **Map** (toolbar) to see station positions (geobubble on satellite basemap).
+
+
+----
+
 
 ## Troubleshooting
 
