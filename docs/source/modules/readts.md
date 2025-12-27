@@ -85,24 +85,28 @@ Below, “(icon)” placeholders refer to your `_static/icons/*.svg` set.
 
 - <img src="../_static/icons/drop_down.svg" class="icon" alt="Window units"> **Unit (drop-down)**: Sets the unit for the window length: `sec / min / hr / day`.
 
-- <img src="../_static/icons/edit_field.svg" class="icon" alt="Start time"> **Start time (edit field)**: Jump to a specific timestamp (UTC) by typing a date string (MATLAB `datenum` compatible).
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Start time"> **Start time (edit field)**: Jump to a specific timestamp (UTC) by typing a date string.
 
 - <img src="../_static/icons/edit_field.svg" class="icon" alt="End time"> **End time (read-only)**: Displays the computed end time for the current window.
 
 - <img src="../_static/icons/button.svg" class="icon" alt="Previous"> **Previous (button)**: Moves to the previous chunk.
 
-- <img src="../_static/icons/button.svg" class="icon" alt="Next"> **Next (button)**>: Moves to the next chunk.
+- <img src="../_static/icons/button.svg" class="icon" alt="Next"> **Next (button)**: Moves to the next chunk.
 
-- <img src="../_static/icons/numeric_slider.svg" class="icon" alt="Navigation"> **Time navigation (slider)**  
-  Jump anywhere across the global span of loaded time series.
+- <img src="../_static/icons/numeric_slider.svg" class="icon" alt="Navigation"> **Time navigation (slider)**: Jump anywhere across the global span of loaded time series.
 
 ### Toolbar tools (top)
 
 - <img src="../_static/icons/readts/timer-off.png" class="icon" alt="Timer" style="height:1.1em; width:auto; vertical-align:middle;"> **Timer** (toggle): Enable/disable “time limit mode” for loaders that support it.
+- 
 - <img src="../_static/icons/readts/information.png" class="icon" alt="Info" style="height:1.1em; width:auto; vertical-align:middle;"> **Info** (push): Open the station metadata window.
+- 
 - <img src="../_static/icons/readts/map.png" class="icon" alt="Map" style="height:1.1em; width:auto; vertical-align:middle;"> **Map** (push): Plot station locations on a geobubble map.
+- 
 - <img src="../_static/icons/readts/detrend.png" class="icon" alt="Detrend" style="height:1.1em; width:auto; vertical-align:middle;"> **Detrend** (toggle): Detrend the displayed segment (time domain).
+- 
 - <img src="../_static/icons/readts/time.png" class="icon" alt="Time Domain" style="height:1.1em; width:auto; vertical-align:middle;"> **Time domain** (toggle): Time-domain plotting.
+- 
 - <img src="../_static/icons/readts/frequency.png" class="icon" alt="Frequency Domain" style="height:1.1em; width:auto; vertical-align:middle;"> **Frequency domain** (toggle): Spectra plotting.
 
 ### Plot panel context menu
@@ -111,105 +115,6 @@ Right-click on the plot panel to access quick scaling helpers:
 
 - **E-channels → Same as Ex / Same as Ey**
 - **B-channels → Same as Bx / Same as By / Same as Bz**
-
-These options copy y-limits from the chosen reference channel to the others for quick visual comparison.
-
-----
-
-## Quick start (step-by-step tutorials)
-
-### Tutorial 1 — Load data (the “first 30 seconds”)
-
-1. Open **File → Load**.
-2. Choose the right manufacturer/instrument menu.
-3. Select **either a folder or a file** depending on the instrument (details below).
-4. After successful load:
-   - the station list appears in **Plot → Stations**
-   - the time slider is populated
-   - the first chunk is plotted automatically
-
-```{tip}
-If you load multiple stations, ReadTS will stack them together per channel and automatically assign colors.
-Use **Plot → Stations** to toggle stations on/off without reloading.
-```
-
-### Tutorial 2 — Navigate in time (slider + chunk controls)
-
-1. Set your window length:
-   - adjust **Window length** spinner
-   - choose units in **Unit** drop-down (`sec/min/hr/day`)
-2. Jump to a specific time:
-   - drag the **time slider**, or
-   - type a timestamp in **Start Date and Time (UTC)**
-3. Step chunk-by-chunk using:
-   - **Previous**
-   - **Next**
-
-```{note}
-When you change the window length, ReadTS automatically prevents going out of bounds.
-If the requested window exceeds the end of the dataset, it shifts the window so the end matches the last available time.
-```
-
-### Tutorial 3 — Switch views: Time vs Frequency
-
-Use the toolbar toggles:
-
-- Click **Time domain** to show time series (Ex/Ey/Bx/By/Bz).
-- Click **Frequency domain** to show power spectra.
-
-Then choose the x-axis convention:
-
-- **Plot → Spectra → Frequency [Hz]** or **Period [s]**
-- **Plot → Spectra → Logarithmic** or **Linear**
-
-```{tip}
-For MT inspection, frequency view is often more intuitive for identifying powerline peaks, while period view is useful when thinking in “MT periods”.
-```
-
-### Tutorial 4 — Apply a quick notch filter (powerline)
-
-1. Go to **Filter → Power Line**.
-2. Select:
-   - **50 Hz** (Europe)
-   - **60 Hz** (Americas)
-   - **16.3 Hz** (railway environments)
-3. The plot refreshes automatically.
-
-```{warning}
-Filters in ReadTS are intended for **inspection**, not as a full processing step.
-If you need reproducible, documented filtering as part of processing, do it in FFMT/MAnTiS pipelines.
-```
-
-### Tutorial 5 — Advanced filtering (LP / HP / BP / Notch / Harmonics)
-
-1. Go to **Filter → Advanced**.
-2. Choose:
-   - Filter type: LP / HP / BP / Line (notch)
-   - Order and cutoff(s)
-   - Optional harmonic removal for notches
-3. Apply, then re-check plots in time and frequency domains.
-
-```{note}
-Internally, ReadTS uses `butter()` + `filtfilt()` for these filters.
-This is great for quick visualization, but it can distort boundaries (edge effects) for short windows.
-```
-
-### Tutorial 6 — Export and share
-
-- Export figures:
-  - **Export → Figure → *.fig**
-  - **Export → Figure → *.png**
-- Send time series to Workspace:
-  - **Export → ts to Workspace**
-
-```{tip}
-The PNG export creates a temporary docked figure you can resize before saving, then writes with high resolution.
-```
-
-### Tutorial 7 — Station metadata and map
-
-- Click **Info** (toolbar) to open station information (sampling rate, instrument fields, etc.).
-- Click **Map** (toolbar) to see station positions (geobubble on satellite basemap).
 
 ----
 
@@ -269,7 +174,7 @@ The error dialog displays the MATLAB report to help debugging.
 
 ----
 
-## Navigate & inspect (what the controls actually do)
+## Navigate & inspect
 
 ### Window length and units
 
@@ -395,6 +300,101 @@ Reset is designed for fast “try again” cycles when you test filters and want
 
 ----
 
+## Quick start (step-by-step tutorials)
+
+### Tutorial 1 — Load data
+
+1. Open **File → Load**.
+2. Choose the right manufacturer/instrument menu.
+3. Select **either a folder or a file** depending on the instrument (details below).
+4. After successful load:
+   - the station list appears in **Plot → Stations**
+   - the time slider is populated
+   - the first chunk is plotted automatically
+
+```{tip}
+If you load multiple stations, ReadTS will stack them together per channel and automatically assign colors.
+Use **Plot → Stations** to toggle stations on/off without reloading.
+```
+
+### Tutorial 2 — Navigate in time (slider + chunk controls)
+
+1. Set your window length:
+   - adjust **Window length** spinner
+   - choose units in **Unit** drop-down (`sec/min/hr/day`)
+2. Jump to a specific time:
+   - drag the **time slider**, or
+   - type a timestamp in **Start Date and Time (UTC)**
+3. Step chunk-by-chunk using:
+   - **Previous**
+   - **Next**
+
+```{note}
+When you change the window length, ReadTS automatically prevents going out of bounds.
+If the requested window exceeds the end of the dataset, it shifts the window so the end matches the last available time.
+```
+
+### Tutorial 3 — Switch views: Time vs Frequency
+
+Use the toolbar toggles:
+
+- Click **Time domain** to show time series (Ex/Ey/Bx/By/Bz).
+- Click **Frequency domain** to show power spectra.
+
+Then choose the x-axis convention:
+
+- **Plot → Spectra → Frequency [Hz]** or **Period [s]**
+- **Plot → Spectra → Logarithmic** or **Linear**
+
+```{tip}
+For MT inspection, frequency view is often more intuitive for identifying powerline peaks, while period view is useful when thinking in “MT periods”.
+```
+
+### Tutorial 4 — Apply a quick notch filter (powerline)
+
+1. Go to **Filter → Power Line**.
+2. Select:
+   - **50 Hz** (Europe)
+   - **60 Hz** (Americas)
+   - **16.3 Hz** (railway environments)
+3. The plot refreshes automatically.
+
+```{warning}
+Filters in ReadTS are intended for **inspection**, not as a full processing step.
+If you need reproducible, documented filtering as part of processing, do it in FFMT/nEMesis pipelines.
+```
+
+### Tutorial 5 — Advanced filtering (LP / HP / BP / Notch / Harmonics)
+
+1. Go to **Filter → Advanced**.
+2. Choose:
+   - Filter type: LP / HP / BP / Line (notch)
+   - Order and cutoff(s)
+   - Optional harmonic removal for notches
+3. Apply, then re-check plots in time and frequency domains.
+
+```{note}
+Internally, ReadTS uses `butter()` + `filtfilt()` for these filters.
+This is great for quick visualization, but it can distort boundaries (edge effects) for short windows.
+```
+
+### Tutorial 6 — Export and share
+
+- Export figures:
+  - **Export → Figure → *.fig**
+  - **Export → Figure → *.png**
+- Send time series to Workspace:
+  - **Export → ts to Workspace**
+
+```{note}
+The PNG export creates a temporary docked figure you can resize before saving, then writes with high resolution.
+```
+
+### Tutorial 7 — Station metadata and map
+
+- Click **Info** (toolbar) to open station information (sampling rate, instrument fields, etc.).
+- Click **Map** (toolbar) to see station positions (geobubble on satellite basemap).
+
 ## Troubleshooting
 
 ### “Nothing plots” or “empty signals”
@@ -413,23 +413,3 @@ Reset is designed for fast “try again” cycles when you test filters and want
 
 - Verify `lat` and `lon` exist and are valid numbers for all loaded stations.
 - Some instruments may not contain GPS metadata; you may need to enrich your `ts` structure externally.
-
-----
-
-## Notes for documentation authors
-
-### Separator line in Read the Docs
-
-If you want a horizontal separator in **MyST Markdown**, use a transition line like this (blank lines before/after):
-
-```text
-----
-```
-
-In reStructuredText, you can also use a “transition” line:
-
-```text
-----
-```
-
-Both render as a horizontal divider in Sphinx/Read the Docs when correctly surrounded by blank lines.
