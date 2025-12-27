@@ -77,8 +77,6 @@ Currently supported instruments/formats:
 
 ## Main GUI components
 
-Below, “(icon)” placeholders refer to your `_static/icons/*.svg` set.
-
 - <img src="../_static/icons/spinner.svg" class="icon" alt="Window length"> **Window length (spinner)**: Sets the duration of the displayed chunk (numeric value).
 
 - <img src="../_static/icons/drop_down.svg" class="icon" alt="Window units"> **Unit (drop-down)**: Sets the unit for the window length: `sec / min / hr / day`.
