@@ -75,7 +75,7 @@ Currently supported instruments/formats:
 ----
 
 
-## Main GUI components (quick map)
+## Main GUI components
 
 Below, “(icon)” placeholders refer to your `_static/icons/*.svg` set.
 
@@ -96,15 +96,15 @@ Below, “(icon)” placeholders refer to your `_static/icons/*.svg` set.
 ### Toolbar tools (top)
 
 - <img src="../_static/icons/readts/timer-off.png" class="icon" alt="Timer" style="height:1.1em; width:auto; vertical-align:middle;"> **Timer** (toggle): Enable/disable “time limit mode” for loaders that support it.
-- 
+
 - <img src="../_static/icons/readts/information.png" class="icon" alt="Info" style="height:1.1em; width:auto; vertical-align:middle;"> **Info** (push): Open the station metadata window.
-- 
+
 - <img src="../_static/icons/readts/map.png" class="icon" alt="Map" style="height:1.1em; width:auto; vertical-align:middle;"> **Map** (push): Plot station locations on a geobubble map.
-- 
+
 - <img src="../_static/icons/readts/detrend.png" class="icon" alt="Detrend" style="height:1.1em; width:auto; vertical-align:middle;"> **Detrend** (toggle): Detrend the displayed segment (time domain).
-- 
+
 - <img src="../_static/icons/readts/time.png" class="icon" alt="Time Domain" style="height:1.1em; width:auto; vertical-align:middle;"> **Time domain** (toggle): Time-domain plotting.
-- 
+
 - <img src="../_static/icons/readts/frequency.png" class="icon" alt="Frequency Domain" style="height:1.1em; width:auto; vertical-align:middle;"> **Frequency domain** (toggle): Spectra plotting.
 
 ### Plot panel context menu
