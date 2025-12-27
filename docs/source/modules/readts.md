@@ -118,7 +118,7 @@ Right-click on the plot panel to access quick scaling helpers:
 
 ----
 
-## Load data (details)
+## Load data
 
 ReadTS uses two loading patterns, depending on how the instrument stores its data.
 
@@ -200,7 +200,7 @@ The error dialog displays the MATLAB report to help debugging.
 
 ----
 
-## Plot modes (details)
+## Plot modes
 
 ### Time domain
 
@@ -236,7 +236,7 @@ Spectrograms are excellent for identifying transient interference that does not 
 
 ----
 
-## Filtering (details)
+## Filtering
 
 ### Quick notch filters
 
@@ -261,7 +261,7 @@ If you see weird boundary behavior, increase the window length or check the raw 
 
 ----
 
-## Export (details)
+## Export
 
 ### Export as *.fig
 
