@@ -50,14 +50,30 @@ For the **visible** (active) time series:
 - <img src="../_static/icons/spinner.svg" class="icon" alt="Window length"> **Window length (spinner)**  
   Increase or decrease the window length using the selected units.
 
-## Quick start (step-by-step)
+## Quick start (summary)
 
 1. **Open** the app: MATLAB → **APPS → FFMT → ReadTS**.
-2. **Load data:** click **Load** and select one or more files (supported formats above).
+2. **Load data:** click **Load** and select one or more files.
 3. **Navigate:** use the **slider**, **Previous**, **Next**, or type a **Start time**.
 4. **View mode:** choose **Time series**, **Power spectrum** (linear/log), or **Spectrogram**.
 5. **Filter (optional):** apply **LP / HP / Notch** and re-plot.
 6. **Export:** save figures as **.fig / .png**, or **send** the series to **Workspace**.
+
+## Load data
+Depending on the instument/manufacturer, in ReadTS you have to either select the path that contains the recordings or select the file directly.
+
+**Select path**
+  - Metronix Geophysics  **ADU-07 / ADU-07e / ADU-08e / ADU-11e** (`.ats`)
+  - Phoenix Geophysics   **MTU5-C / MTU8-A** (`.td*`)
+  - LEMI                 **417** (`.b*`, `.t*`)
+  - LEMI                 **420 / 424** (`.txt`)
+  - LEMI                 **423** (`.b423`)
+  - Zonge International  **ZEN High-Res Receiver** ((`.z3d`)
+
+**Select file**
+  - Phoenix Geophysics   **MTU5 / MTU5-A** (`.tsh`, `.tsl`)
+  - Phoenix Geophysics   **MTU5 / MTU5-A / V8** (`.ts*`)
+
 
 ```{note}
 If a file does not load, verify the instrument format and sampling rate,
