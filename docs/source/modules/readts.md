@@ -1,18 +1,18 @@
 # ReadTS
 
 **Purpose.** Read and explore magnetotelluric (MT) time series through a MATLAB App, with fast navigation, plotting, and basic exports.
-
+----
 ## Main features
 
 - **Load one or multiple time series** from the following instruments:
-  - Metronix Geophysics **ADU-07 / ADU-07e / ADU-08e** (`.ats`)
-  - Phoenix Geophysics **MTU5 / MTU5-A** (`.tsh`, `.tsl`)
-  - Phoenix Geophysics **MTU5 / MTU5-A / V8** (`.ts*`)
-  - Phoenix Geophysics **MTU5-C / MTU8-A** (`.td*`)
-  - **LEMI 417** (`.b*`, `.t*`)
-  - **LEMI 420 / 424** (`.txt`)
-  - **LEMI 423** (`.b423`)
-  - **Zonge** (supported formats)
+  - Metronix Geophysics    **ADU-07 / ADU-07e / ADU-08e / ADU-11e** (`.ats`)
+  - Phoenix Geophysics     **MTU5 / MTU5-A** (`.tsh`, `.tsl`)
+  - Phoenix Geophysics     **MTU5 / MTU5-A / V8** (`.ts*`)
+  - Phoenix Geophysics     **MTU5-C / MTU8-A** (`.td*`)
+  - LEMI                   **417** (`.b*`, `.t*`)
+  - LEMI                   **420 / 424** (`.txt`)
+  - LEMI                   **423** (`.b423`)
+  - - Zonge International  **ZEN High-Res Receiver** ((`.z3d`)
 - **Visualize power spectrum** in **linear** or **logarithmic** scale.
 - Switch between **frequency** and **period** views.
 - **Custom time-series filtering:** low-pass, high-pass, notch.
@@ -29,6 +29,8 @@ For the **visible** (active) time series:
 - Plot in **time domain** (time series) or **frequency domain** (power spectrum).
 - Display **calibrated data** in **field units**.
 - Show **spectrograms** of the active series.
+
+----
 
 ## Main GUI components
 
@@ -50,6 +52,8 @@ For the **visible** (active) time series:
 - <img src="../_static/icons/spinner.svg" class="icon" alt="Window length"> **Window length (spinner)**  
   Increase or decrease the window length using the selected units.
 
+----
+
 ## Quick start (summary)
 
 1. **Open** the app: MATLAB → **APPS → FFMT → ReadTS**.
@@ -59,20 +63,22 @@ For the **visible** (active) time series:
 5. **Filter (optional):** apply **LP / HP / Notch** and re-plot.
 6. **Export:** save figures as **.fig / .png**, or **send** the series to **Workspace**.
 
+----
+
 ## Load data
-Depending on the instument/manufacturer, in ReadTS you have to either select the path that contains the recordings or select the file directly.
+Depending on the instrument/manufacturer, in ReadTS you have to either select the recording path or the file directly.
 
 **Select path**
-  - Metronix Geophysics  **ADU-07 / ADU-07e / ADU-08e / ADU-11e** (`.ats`)
-  - Phoenix Geophysics   **MTU5-C / MTU8-A** (`.td*`)
-  - LEMI                 **417** (`.b*`, `.t*`)
-  - LEMI                 **420 / 424** (`.txt`)
-  - LEMI                 **423** (`.b423`)
-  - Zonge International  **ZEN High-Res Receiver** ((`.z3d`)
+    - Metronix Geophysics  **ADU-07 / ADU-07e / ADU-08e / ADU-11e** (`.ats`)
+    - Phoenix Geophysics   **MTU5-C / MTU8-A** (`.td*`)
+    - LEMI                 **417** (`.b*`, `.t*`)
+    - LEMI                 **420 / 424** (`.txt`)
+    - LEMI                 **423** (`.b423`)
+    - Zonge International  **ZEN High-Res Receiver** ((`.z3d`)
 
 **Select file**
-  - Phoenix Geophysics   **MTU5 / MTU5-A** (`.tsh`, `.tsl`)
-  - Phoenix Geophysics   **MTU5 / MTU5-A / V8** (`.ts*`)
+    - Phoenix Geophysics   **MTU5 / MTU5-A** (`.tsh`, `.tsl`)
+    - Phoenix Geophysics   **MTU5 / MTU5-A / V8** (`.ts*`)
 
 
 ```{note}
