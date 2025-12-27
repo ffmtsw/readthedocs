@@ -12,7 +12,7 @@
   - LEMI                   **417** (`.b*`, `.t*`)
   - LEMI                   **420 / 424** (`.txt`)
   - LEMI                   **423** (`.b423`)
-  - - Zonge International  **ZEN High-Res Receiver** ((`.z3d`)
+  - Zonge International    **ZEN High-Res Receiver** ((`.z3d`)
 - **Visualize power spectrum** in **linear** or **logarithmic** scale.
 - Switch between **frequency** and **period** views.
 - **Custom time-series filtering:** low-pass, high-pass, notch.
