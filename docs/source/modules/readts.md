@@ -104,9 +104,10 @@ Below, “(icon)” placeholders refer to your `_static/icons/*.svg` set.
 
 ### Toolbar tools (top)
 
-- <img src="../_static/icons/readts/timmer-off.png" class="icon" alt="Navigation"> **Timer** (toggle):
-  Enable/disable “time limit mode” for loaders that support it.
-- <img src="../_static/icons/readts/information.png" class="icon" alt="Navigation"> **Info** (push):
+- - <img src="../_static/icons/readts/timer-off.png"
+       class="icon" alt="Timer"
+       style="height:1.1em; width:auto; vertical-align:middle;"> **Timer** (toggle): Enable/disable “time limit mode” for loaders that support it.
+- <img src="../_static/icons/readts/information.png" class="icon" alt="Info"> **Info** (push):
   Open the station metadata window.
 - **Map** (push): plot station locations on a geobubble map.
 - **Detrend** (toggle): detrend the displayed segment (time domain).
