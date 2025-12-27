@@ -1,11 +1,5 @@
 # ReadTS
 
-**Purpose:** Read, inspect, and quickly explore magnetotelluric (MT) time series using a MATLAB App, with fast navigation, time/frequency plots, basic filtering, and exports.
-
-----
-
-## What ReadTS is
-
 ReadTS is a **viewer and lightweight QC tool** for time series. It focuses on:
 
 - Loading multiple stations and quickly comparing channels.
