@@ -77,19 +77,19 @@ Currently supported instruments/formats:
 
 ## Main GUI components
 
-- <img src="../_static/icons/spinner.svg" class="icon" alt="Window length"> **Window length (spinner)**: Sets the duration of the displayed chunk (numeric value).
+- <img src="../_static/icons/spinner.svg" class="icon" alt="Window length"> **Window length** (spinner): Sets the duration of the displayed chunk (numeric value).
 
-- <img src="../_static/icons/drop_down.svg" class="icon" alt="Window units"> **Unit (drop-down)**: Sets the unit for the window length: `sec / min / hr / day`.
+- <img src="../_static/icons/drop_down.svg" class="icon" alt="Window units"> **Unit** (drop-down): Sets the unit for the window length: `sec / min / hr / day`.
 
-- <img src="../_static/icons/edit_field.svg" class="icon" alt="Start time"> **Start time (edit field)**: Jump to a specific timestamp (UTC) by typing a date string.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Start time"> **Start time** (edit field): Jump to a specific timestamp (UTC) by typing a date string.
 
-- <img src="../_static/icons/edit_field.svg" class="icon" alt="End time"> **End time (read-only)**: Displays the computed end time for the current window.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="End time"> **End time** (read-only): Displays the computed end time for the current window.
 
-- <img src="../_static/icons/button.svg" class="icon" alt="Previous"> **Previous (button)**: Moves to the previous chunk.
+- <img src="../_static/icons/button.svg" class="icon" alt="Previous"> **Previous** (button): Moves to the previous chunk.
 
-- <img src="../_static/icons/button.svg" class="icon" alt="Next"> **Next (button)**: Moves to the next chunk.
+- <img src="../_static/icons/button.svg" class="icon" alt="Next"> **Next** (button): Moves to the next chunk.
 
-- <img src="../_static/icons/numeric_slider.svg" class="icon" alt="Navigation"> **Time navigation (slider)**: Jump anywhere across the global span of loaded time series.
+- <img src="../_static/icons/numeric_slider.svg" class="icon" alt="Navigation"> **Time navigation** (slider): Jump anywhere across the global span of loaded time series.
 
 ### Toolbar tools (top)
 
