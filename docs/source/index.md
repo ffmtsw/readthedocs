@@ -20,5 +20,6 @@ general
 general/mt
 modules
 modules/index
+structures/index
 faq
 changelog
