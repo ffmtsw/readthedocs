@@ -43,7 +43,7 @@ Currently supported instruments/formats:
 
 - **Time domain view**: stacked plots for Ex, Ey, Bx, By, Bz.
 - **Frequency domain view**: power spectra (linear/log x and y supported through menus).
-- **Spectrogram view**: time–frequency power view (STFT-based).
+- **Spectrogram view**: time–frequency power view (STFT-based). Access via `Actions → Spectrogram `. Opens one spectrogram figure per selected station.
 
 ### 3) Fast navigation
 
@@ -405,7 +405,27 @@ The PNG export creates a temporary docked figure you can resize before saving, t
 - Click **Info** (toolbar) to open station information (sampling rate, instrument fields, etc.).
 - Click **Map** (toolbar) to see station positions (geobubble on satellite basemap).
 
+```{note}
+Mapping Toolbox is needed to display maps.
+```
 
+### Tutorial 8 — Compute a spectrogram for one or more stations
+
+1. **Load** one or more stations using **File → Load → ...**
+2. (Optional) Make the loaded span smaller:
+   - enable **Timer** during load (supported by some loaders), or
+   - use **Actions → Decimate** to reduce the sampling rate by 2×
+3. Go to **Actions → Spectrogram**
+4. If multiple stations are loaded, select one or more stations in the dialog.
+5. Inspect the spectrogram(s) for:
+   - powerline fundamentals and harmonics,
+   - intermittent bursts,
+   - short transient spikes,
+   - time intervals with abnormal broadband noise.
+
+```{tip}
+   Use the spectrogram to choose good time windows for later MT processing: Pick intervals with minimal interference and stationary conditions, and avoid time spans with strong transient contamination.
+```
 ----
 
 
