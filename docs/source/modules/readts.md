@@ -43,7 +43,7 @@ Currently supported instruments/formats:
 
 - **Time domain view**: stacked plots for Ex, Ey, Bx, By, Bz.
 - **Frequency domain view**: power spectra (linear/log x and y supported through menus).
-- **Spectrogram view**: time–frequency power view (STFT-based). Access via `Actions → Spectrogram `. Opens one spectrogram figure per selected station.
+- **Spectrogram view**: time–frequency power view (STFT-based). Access via **Actions → Spectrogram**. Opens one spectrogram figure per selected station.
 
 ### 3) Fast navigation
 
@@ -51,7 +51,7 @@ Currently supported instruments/formats:
 - **Previous / Next** buttons to move chunk-by-chunk.
 - **Start time text box** to jump to an exact timestamp.
 - **Window length** (spinner) and **time unit** (drop-down) to define the displayed chunk size.
-- Optional **Timer limit** toggle (toolbar) to prompt for start/end range when loading (supported by some loaders).
+- **Timer limit** toggle (toolbar) to prompt for start/end range when loading (supported by some loaders).
 
 ### 4) Lightweight filtering for inspection
 
@@ -405,7 +405,7 @@ The PNG export creates a temporary docked figure you can resize before saving, t
 - Click **Info** (toolbar) to open station information (sampling rate, instrument fields, etc.).
 - Click **Map** (toolbar) to see station positions (geobubble on satellite basemap).
 
-```{note}
+```{warning}
 Mapping Toolbox is needed to display maps.
 ```
 
