@@ -18,8 +18,9 @@ getting-started
 tutorials/quickstart-gui
 general
 general/mt
+structures
+structures/index
 modules
 modules/index
-structures/index
 faq
 changelog
