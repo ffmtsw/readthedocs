@@ -9,10 +9,8 @@ Below is a short overview of the main structures. Use the linked pages for detai
 
 ## ``ts`` — Time series container
 
-The ``ts`` structure stores **raw (or lightly processed) electromagnetic time series** together with all metadata required to interpret the recording correctly.
-It bundles the time vector, sampling rate, channel names/mapping, site coordinates, sensor/dipole geometry, gap tracking, and calibration information.
-
-Typical use: loaders → QC → filtering/decimation → segmentation/spectral estimation.
+The ``ts`` structure stores **raw electromagnetic time series** together with all metadata required to interpret the recording correctly.
+It bundles the time vector, sampling rate, channel names/mapping, site coordinates, dipole geometry, sensor numbers, and calibration information.
 
 [Open: ``ts``](ts)
 
