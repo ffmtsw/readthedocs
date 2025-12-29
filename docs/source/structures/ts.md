@@ -182,15 +182,14 @@ System metadata:
 ts = allocate_ts();
 
 % Basic identity
-ts.site   = "SITE_001";
-ts.name   = "SITE_001";
-ts.device = "Metronix ADU-07";
-ts.serial = "A07-XXXX";
+ts.site   = 'SITE_001';
+ts.device = 'Metronix ADU07';
+ts.serial = 101;
 
 % Time series
 ts.sr   = 512;
 ts.data = randn(100000,5);
-ts.sn   = size(ts.data,1);
+ts.sn   = 1size(ts.data,1);
 
 % Time (datenum) example
 t0 = datenum(2026,1,1,0,0,0);
@@ -202,4 +201,5 @@ ts.lon  = -99.1332;
 ts.elev = 2240;
 ts.dipx = 50;
 ts.dipy = 50;
+
 ```
