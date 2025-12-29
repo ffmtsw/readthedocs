@@ -5,6 +5,18 @@ It is designed to be created by loaders and then passed consistently to QC, filt
 
 ---
 
+## How `ts` is created
+
+`ts` is initialized using:
+
+```matlab
+ts = allocate_ts();
+```
+
+The allocator pre-defines all expected fields and sets default conventions for channel ordering, rotations, and boolean flags.
+
+---
+ 
 ## What `ts` represents
 
 A single `ts` instance typically corresponds to **one station recording** (or one merged run), containing:
@@ -18,18 +30,6 @@ A single `ts` instance typically corresponds to **one station recording** (or on
 - calibration responses and system metadata (`cal`).
 
 In FFMT, `ts` is intended to be **self-contained**: it carries both data and the minimum metadata needed to process it correctly without relying on external state.
-
----
-
-## How `ts` is created
-
-`ts` is initialized using:
-
-```matlab
-ts = allocate_ts();
-```
-
-The allocator pre-defines all expected fields and sets default conventions for channel ordering, rotations, and boolean flags.
 
 ---
 
