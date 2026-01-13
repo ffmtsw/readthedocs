@@ -36,9 +36,19 @@ html_css_files = ["custom.css"]
 source_suffix = [".md", ".rst"]
 myst_enable_extensions = ["colon_fence", "deflist", "fieldlist", "tasklist"]
 
+# html_theme_options = {
+#    "logo_only": True,                  
+#    "collapse_navigation": False,
+#    "navigation_depth": 4,
+#}
+
+html_theme = "sphinx_rtd_theme"
+
 html_theme_options = {
-    "logo_only": True,                  
-    "collapse_navigation": False,
-    "navigation_depth": 4,
+    "logo_only": True,
+    "collapse_navigation": False,  # <- deja el tree abierto
+    "navigation_depth": 6,         # <- sube si tienes más niveles
+    "titles_only": False,          # <- muestra más items del tree
+    "sticky_navigation": True,     # <- sidebar fijo al scroll (opcional)
 }
 
