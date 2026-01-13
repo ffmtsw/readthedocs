@@ -42,6 +42,21 @@ Use it for stability checks, time‑lapse studies, and monitoring‑style workfl
 
 ----
 
+## nEMesis pages
+
+```{toctree}
+:maxdepth: 1
+:caption: nEMesis
+
+nemesis_task_manager
+nemesis_recording_database
+nemesis_post_processing
+nemesis_temporal_analysis
+```
+
+
+----
+
 
 ## Before you start
 
