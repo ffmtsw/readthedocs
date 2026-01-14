@@ -1,8 +1,7 @@
-# nEMesis Task Manager
+# Task Manager
 
-nEMesis Task Manager is the **task / job / site orchestration layer** for nEMesis processing workflows in MATLAB.
-It lets you create processing “tasks” that contain one or more “jobs”, each job operating on one or more MT stations
-(single-site or multi-site) and one or more sampling-frequency groups.
+nEMesis Task Manager is the **task / job / site** orchestration layer for nEMesis processing workflows in MATLAB.
+It lets you create processing `tasks` that contain one or more `jobs`, each `job` operating on one or more MT stations (single-site or multi-site) and one or more sampling-frequency groups.
 
 The app focuses on:
 - **Reproducibility:** every job stores its processing parameters.
@@ -11,7 +10,7 @@ The app focuses on:
 
 ---
 
-## 1) Core concepts
+## Core concepts
 
 ### Task
 A **Task** is the top-level container saved as a `.mat` file. It includes:
@@ -35,7 +34,7 @@ A **Site** (station) contains metadata required for processing:
 
 ---
 
-## 2) What the app produces
+## What the Task Manager does
 
 When you execute a task/job, the app should:
 - Generate processing outputs in an organized output directory
@@ -52,7 +51,7 @@ Output naming is typically of the form:
 
 ---
 
-## 3) UI overview
+## Main GUI Components
 
 ### Top bar (menus)
 - **File → Load**: load time series from supported formats/instruments.
@@ -69,7 +68,7 @@ Output naming is typically of the form:
 
 ---
 
-## 4) Data model (what is stored in the `.mat` task file)
+## Data model (what is stored in the `.mat` task file)
 
 A typical structure is:
 
@@ -85,7 +84,7 @@ A typical structure is:
 
 ---
 
-## 5) Typical workflow (end-to-end)
+## Typical workflow (end-to-end)
 
 1. **Create a new task** (e.g., `+` button).
 2. **Load time series** (`File → Load → Instrument`).
@@ -101,7 +100,7 @@ A typical structure is:
 
 ---
 
-## 6) Job table (`table_job`) — recommended columns
+## Job table (`table_job`) — recommended columns
 
 Common job columns include:
 - **Job name**
@@ -118,7 +117,7 @@ If you keep the UI table editable, ensure edits are mirrored back into the `task
 
 ---
 
-## 7) Site table (`table_site`) — recommended columns
+## Site table (`table_site`) — recommended columns
 
 Common site columns include:
 - **Site ID / name**
@@ -131,7 +130,7 @@ Common site columns include:
 
 ---
 
-## 8) Processing parameters (what matters most)
+## Processing parameters (what matters most)
 
 ### Segmentation
 Key values typically include:
@@ -158,7 +157,7 @@ Often you compute transfer-function estimates from a subset of “best” window
 
 ---
 
-## 9) Execution modes
+## Execution modes
 
 ### Execute Selected
 Runs only the currently selected job(s). Use when iterating on parameters.
@@ -174,7 +173,7 @@ If your pipeline supports it, execution can be wrapped in `parfor` at:
 
 ---
 
-## 10) Utilities (Tasks menu)
+## Utilities (Tasks menu)
 
 Typical utilities you may expose:
 - **Auto Tasks**: generate jobs automatically from a folder structure or metadata rules.
@@ -184,7 +183,7 @@ Typical utilities you may expose:
 
 ---
 
-## 11) Common pitfalls and best practices
+## Common pitfalls and best practices
 
 - **Always save tasks before running**: it preserves a stable snapshot of your configuration.
 - **Keep job time ranges explicit**: avoid implicit “latest data” assumptions.
@@ -193,31 +192,7 @@ Typical utilities you may expose:
 
 ---
 
-## 12) Minimal folder conventions (recommended)
-
-A clean layout that works well with ReadTheDocs and MATLAB projects:
-
-```
-project_root/
-  docs/
-    nemesis_task_manager.md
-  app/
-    nEMesis_TaskManager.mlapp
-  src/
-    +nemesis/
-    utilities/
-  tasks/
-    task_*.mat
-  outputs/
-    <task_name>/
-      <job_name>/
-        Processing Report - <timestamp>.mat
-        ...
-```
-
----
-
-## 13) Troubleshooting checklist
+## Troubleshooting checklist
 
 - Job runs but outputs are empty:
   - confirm time range overlaps available data
@@ -235,7 +210,7 @@ project_root/
 
 ---
 
-## 14) Quick Start (paste this at the top of the repo)
+## Quick Start (paste this at the top of the repo)
 
 1. Open `nEMesis_TaskManager`.
 2. Create a new task (`+`).
@@ -250,7 +225,7 @@ project_root/
 ---
 ---
 
-## 15) Tutorials
+## Tutorials
 
 These short, practical walkthroughs match the intended “Task → Job → Site” workflow. They assume the app is already open.
 
