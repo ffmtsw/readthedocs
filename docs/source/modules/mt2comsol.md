@@ -80,77 +80,77 @@ It focuses on:
 
 ### DEM and Model Domain Setup
 
-- **Max. Frequency [Hz]** (numeric edit field): Sets the highest MT frequency used to estimate the shallowest skin depth.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Max frequency"> **Max. Frequency [Hz]** (numeric edit field): Sets the highest MT frequency used to estimate the shallowest skin depth.
 
-- **Min. Frequency [Hz]** (numeric edit field): Sets the lowest MT frequency used to estimate the deepest skin depth.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Min frequency"> **Min. Frequency [Hz]** (numeric edit field): Sets the lowest MT frequency used to estimate the deepest skin depth.
 
-- **Resistivity [Ohmm]** (numeric edit field): Defines the reference resistivity used for the skin-depth estimate.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Resistivity"> **Resistivity [Ohmm]** (numeric edit field): Defines the reference resistivity used for the skin-depth estimate.
 
-- **Skin depth min [km]** (read-only numeric field): Displays the estimated minimum skin depth.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Skin depth min"> **Skin depth min [km]** (read-only numeric field): Displays the estimated minimum skin depth.
 
-- **Skin depth max [km]** (read-only numeric field): Displays the estimated maximum skin depth.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Skin depth max"> **Skin depth max [km]** (read-only numeric field): Displays the estimated maximum skin depth.
 
-- **Central Latitude [deg]** (numeric edit field): Sets the reference latitude of the model domain.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Central latitude"> **Central Latitude [deg]** (numeric edit field): Sets the reference latitude of the model domain.
 
-- **Central Longitude [deg]** (numeric edit field): Sets the reference longitude of the model domain.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Central longitude"> **Central Longitude [deg]** (numeric edit field): Sets the reference longitude of the model domain.
 
-- **Use Center from MT Structure** (button): Loads a `*.mat` file, reads the variable `mt`, and uses its center as the domain reference.
+- <img src="../_static/icons/button.svg" class="icon" alt="Use center from MT structure"> **Use Center from MT Structure** (button): Loads a `*.mat` file, reads the variable `mt`, and uses its center as the domain reference.
 
-- **Easting min. [km]** (numeric edit field): Minimum x-extent relative to the reference center.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Easting min"> **Easting min. [km]** (numeric edit field): Minimum x-extent relative to the reference center.
 
-- **Easting max. [km]** (numeric edit field): Maximum x-extent relative to the reference center.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Easting max"> **Easting max. [km]** (numeric edit field): Maximum x-extent relative to the reference center.
 
-- **Northing min. [km]** (numeric edit field): Minimum y-extent relative to the reference center.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Northing min"> **Northing min. [km]** (numeric edit field): Minimum y-extent relative to the reference center.
 
-- **Northing max. [km]** (numeric edit field): Maximum y-extent relative to the reference center.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Northing max"> **Northing max. [km]** (numeric edit field): Maximum y-extent relative to the reference center.
 
-- **Calculate Limits** (button): Converts the local extents into geographic limits and computes the total area.
+- <img src="../_static/icons/button.svg" class="icon" alt="Calculate limits"> **Calculate Limits** (button): Converts the local extents into geographic limits and computes the total area.
 
-- **Latitude min. [deg]** (read-only numeric field): Southern geographic limit of the DEM window.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Latitude min"> **Latitude min. [deg]** (read-only numeric field): Southern geographic limit of the DEM window.
 
-- **Latitude max. [deg]** (read-only numeric field): Northern geographic limit of the DEM window.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Latitude max"> **Latitude max. [deg]** (read-only numeric field): Northern geographic limit of the DEM window.
 
-- **Longitude min. [deg]** (read-only numeric field): Western geographic limit of the DEM window.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Longitude min"> **Longitude min. [deg]** (read-only numeric field): Western geographic limit of the DEM window.
 
-- **Longitude max. [deg]** (read-only numeric field): Eastern geographic limit of the DEM window.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Longitude max"> **Longitude max. [deg]** (read-only numeric field): Eastern geographic limit of the DEM window.
 
-- **Area [km2]** (read-only numeric field): Displays the area of the selected domain.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Area"> **Area [km2]** (read-only numeric field): Displays the area of the selected domain.
 
-- **Format** (drop-down): Selects the DEM output format requested from the automatic download workflow.
+- <img src="../_static/icons/drop_down.svg" class="icon" alt="Format"> **Format** (drop-down): Selects the DEM output format requested from the automatic download workflow.
 
-- **Resolution** (drop-down): Selects the DEM sampling density.
+- <img src="../_static/icons/drop_down.svg" class="icon" alt="Resolution"> **Resolution** (drop-down): Selects the DEM sampling density.
 
-- **Plot DEM** (check box): If enabled, plots the DEM immediately after download.
+- <img src="../_static/icons/check_box.svg" class="icon" alt="Plot DEM"> **Plot DEM** (check box): If enabled, plots the DEM immediately after download.
 
-- **Select Folder** (button): Chooses the working folder where DEM and COMSOL input files will be stored.
+- <img src="../_static/icons/button.svg" class="icon" alt="Select folder"> **Select Folder** (button): Chooses the working folder where DEM and COMSOL input files will be stored.
 
-- **Folder** (read-only text field): Displays the selected project folder.
+- <img src="../_static/icons/edit_field.svg" class="icon" alt="Folder"> **Folder** (read-only text field): Displays the selected project folder.
 
-- **Download DEM** (button): Downloads the DEM for the current geographic limits using the selected settings.
+- <img src="../_static/icons/button.svg" class="icon" alt="Download DEM"> **Download DEM** (button): Downloads the DEM for the current geographic limits using the selected settings.
 
-- **Open Folder** (button): Opens the selected working directory in the system file explorer.
+- <img src="../_static/icons/button.svg" class="icon" alt="Open folder"> **Open Folder** (button): Opens the selected working directory in the system file explorer.
 
 ### Modeling Workflow
 
-- **Installation** (status panel): Reports whether COMSOL and LiveLink for MATLAB are available.
+- <img src="../_static/icons/information.svg" class="icon" alt="Installation status"> **Installation** (status panel): Reports whether COMSOL and LiveLink for MATLAB are available.
 
-- **Download DEM** (button, DEM panel): Opens the GMRT website for manual DEM download.
+- <img src="../_static/icons/button.svg" class="icon" alt="Manual DEM download"> **Download DEM** (button, DEM panel): Opens the GMRT website for manual DEM download.
 
-- **Plot DEM** (button, DEM panel): Opens the DEM plotting utility.
+- <img src="../_static/icons/button.svg" class="icon" alt="Plot DEM"> **Plot DEM** (button, DEM panel): Opens the DEM plotting utility.
 
-- **Create Input Files** (button): Launches the COMSOL input-file generator for the selected project folder.
+- <img src="../_static/icons/button.svg" class="icon" alt="Create input files"> **Create Input Files** (button): Launches the COMSOL input-file generator for the selected project folder.
 
-- **Start COMSOL Session** (slider switch): Starts or resets the GUI-side COMSOL session.
+- <img src="../_static/icons/switch.svg" class="icon" alt="Start COMSOL session"> **Start COMSOL Session** (switch): Starts or resets the GUI-side COMSOL session.
 
-- **Status lamps** (red/green): Indicate whether a COMSOL connection is inactive or active.
+- <img src="../_static/icons/lamp_off.svg" class="icon" alt="Inactive status"> **Status lamps** (red/green): Indicate whether a COMSOL connection is inactive or active.
 
-- **Select MPH File** (button): Opens the MT response-extraction workflow. This button is enabled only when a valid COMSOL session is active.
+- <img src="../_static/icons/button.svg" class="icon" alt="Select MPH file"> **Select MPH File** (button): Opens the MT response-extraction workflow. This button is enabled only when a valid COMSOL session is active.
 
 ### Menu entries
 
-- **Tools → Anisotropy Calculator**: Opens the anisotropy-tensor calculator.
+- <img src="../_static/icons/menu.svg" class="icon" alt="Anisotropy calculator"> **Tools → Anisotropy Calculator**: Opens the anisotropy-tensor calculator.
 
-- **Extras → Documentation**: Opens the online documentation page for MT2COMSOL.
+- <img src="../_static/icons/menu.svg" class="icon" alt="Documentation"> **Extras → Documentation**: Opens the online documentation page for MT2COMSOL.
 
 ----
 
