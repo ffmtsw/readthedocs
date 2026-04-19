@@ -17,7 +17,7 @@ used in the existing FFMT documentation for modules such as ReadTS and nEMesis.
 
 * * *
 
-.. figure:: ../_static/images/modules/mt2comsol/mt2comsol_gui.png
+.. figure:: ../_static/images/mt2comsol/mt2comsol_gui.png
    :width: 100%
    :align: center
    :alt: MT2COMSOL main GUI
