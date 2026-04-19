@@ -169,7 +169,7 @@ You provide:
 and the GUI updates the expected shallow and deep skin-depth estimates automatically.
 
 This is useful as a quick planning tool before defining the final domain size.
-It gives a first-order idea of the spatial scale that may be relevant for the model.
+It provides a first-order sense of the spatial scale that may be relevant to the model.
 
 ```{note}
 The shallowest skin depth is linked to the **highest frequency**, while the deepest skin depth is linked to the **lowest frequency**.
@@ -213,7 +213,7 @@ The GUI converts the local domain into:
 These fields are read-only because they are derived values.
 
 ```{tip}
-A practical workflow is: first define the local domain in kilometers, then use **Calculate Limits**, and only after that proceed to DEM download.
+A practical workflow is: first define the local domain in kilometers, then use **Calculate Limits**, and only then proceed to download the DEM.
 ```
 
 ### DEM download settings
@@ -748,7 +748,7 @@ Stations with invalid interpolated elevation, or stations that fall outside the 
 ----
 
 
-## Tutorial 12 — Optionally add support points around stations
+#### Step 12: Optionally add support points around stations
 
 The routine then asks:
 
@@ -780,7 +780,7 @@ Support points are useful when you want additional geometric control near MT sit
 ----
 
 
-## Tutorial 13 — Export `Topography.txt` and `Coordinates.txt`
+#### Step 13: Export `Topography.txt` and `Coordinates.txt`
 
 After DEM, station, support-point, and coastline preparation, the routine writes:
 
@@ -809,7 +809,7 @@ In the exported topography file, `DEM.dem0` is used. This means values below sea
 ----
 
 
-## Tutorial 14 — Define the thin-layer conductance background
+#### Step 14: Define the thin-layer conductance background
 
 The routine then asks for:
 
@@ -842,7 +842,7 @@ The conductance map is built as:
 ----
 
 
-## Tutorial 15 — Optionally include sediment conductance
+#### Step 15: Optionally include sediment conductance
 
 The workflow then asks:
 
@@ -884,12 +884,13 @@ Diagnostic plots may include:
 
 ```{warning}
 The sediment workflow assumes that the sediment raster is compatible with the DEM extent and coordinate system.
+AQui quiero que me agregues un boton con un link a dropbox con el que el usuario se peuda descargar el archivo de conductancia
 ```
 
 ----
 
 
-## Tutorial 16 — Resample and export `ThinLayer.txt`
+#### Step 16: Resample and export `ThinLayer.txt`
 
 Before export, the conductance model is resampled onto a coarser grid for COMSOL.
 
@@ -918,7 +919,7 @@ If coastline contours were selected, coastline points are appended using backgro
 ----
 
 
-## Tutorial 17 — Review and save the info summary
+#### Step 17: Review and save the info summary
 
 At the end of the workflow, the routine builds an `info` structure containing summary information such as:
 
@@ -1031,12 +1032,6 @@ Contains:
 ```{tip}
 For first-time setups, keep plotting enabled and save the final `info.txt`. This makes it much easier to trace domain size, reference coordinates, and output choices later.
 ```
-
-
-
-
-
-
 
 
 
