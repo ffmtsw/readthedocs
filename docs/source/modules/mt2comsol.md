@@ -411,294 +411,294 @@ It can also save:
 
 #### Step 1: Start the workflow and select the project folder
 
-Run the function from MATLAB:
-
-```matlab
-MT2COMSOL_TopoBathy
-```
-
-If no input argument is provided, the routine first asks you to select the **project folder** where all output files will be saved.
-
-```{tip}
-Create one dedicated folder per COMSOL model setup. This keeps the exported ASCII files, station files, and metadata together.
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_01_project_folder.png
-:alt: Select project folder
-:width: 70%
-:align: center
-```
-
-----
-
-
-## Step 2: Choose whether to plot diagnostic results
-
-After selecting the project folder, the routine asks:
-
-- **Do you want to plot the results?**
-
-If you choose:
-
-- **Yes**: the workflow generates multiple diagnostic figures during DEM preparation, conductance generation, and contour selection.
-- **No**: the workflow still runs, but no intermediate figures are shown.
-
-```{note}
-For first-time use, it is strongly recommended to choose **Yes**. The diagnostic plots are useful for checking DEM orientation, coastline extraction, station positions, and conductance maps.
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_02_plot_option.png
-:alt: Plot option dialog
-:width: 45%
-:align: center
-```
+  Run the function from MATLAB:
+  
+  ```matlab
+  MT2COMSOL_TopoBathy
+  ```
+  
+  If no input argument is provided, the routine first asks you to select the **project folder** where all output files will be saved.
+  
+  ```{tip}
+  Create one dedicated folder per COMSOL model setup. This keeps the exported ASCII files, station files, and metadata together.
+  ```
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_01_project_folder.png
+  :alt: Select project folder
+  :width: 70%
+  :align: center
+  ```
 
 ----
 
 
-## Tutorial 3 — Select the DEM source
+#### Step 2: Choose whether to plot diagnostic results
 
-The next dialog lets you select the DEM source file type:
-
-- **GeoTIF**
-- **Matlab DEM**
-
-### Option A — GeoTIF
-
-Choose this option if your terrain model is stored as one or more GeoTIFF files.
-
-The routine then asks you to select:
-
-1. a **low-resolution GeoTIFF**,
-2. optionally a **high-resolution GeoTIFF**.
-
-For each DEM, the routine also asks whether:
-
-- topography should be preserved,
-- bathymetry should be preserved.
-
-### Option B — Matlab DEM
-
-Choose this option if you already have a MATLAB `.mat` file containing a variable named `dem`.
-
-The structure is expected to contain fields such as:
-
-- `HRdem`
-- `unit`
-- `R`
-- `LAT`
-- `LON`
-
-```{warning}
-If the selected MAT-file does not contain a variable named `dem`, the workflow stops and shows an error dialog.
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_03_dem_source.png
-:alt: DEM source selection
-:width: 45%
-:align: center
-```
+  After selecting the project folder, the routine asks:
+  
+  - **Do you want to plot the results?**
+  
+  If you choose:
+  
+  - **Yes**: the workflow generates multiple diagnostic figures during DEM preparation, conductance generation, and contour selection.
+  - **No**: the workflow still runs, but no intermediate figures are shown.
+  
+  ```{note}
+  For first-time use, it is strongly recommended to choose **Yes**. The diagnostic plots are useful for checking DEM orientation, coastline extraction, station positions, and conductance maps.
+  ```
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_02_plot_option.png
+  :alt: Plot option dialog
+  :width: 45%
+  :align: center
+  ```
 
 ----
 
 
-## Tutorial 4 — Load the low-resolution DEM
+#### Step 3: Select the DEM source
 
-The low-resolution DEM defines the outer modelling region.
+  The next dialog lets you select the DEM source file type:
+  
+  - **GeoTIF**
+  - **Matlab DEM**
 
-After choosing the file, the routine:
+##### Option A — GeoTIF
 
-- reads the raster,
-- fills missing values,
-- optionally suppresses topography and/or bathymetry,
-- applies Gaussian smoothing,
-- converts coordinates to a centered Cartesian grid in kilometers.
+  Choose this option if your terrain model is stored as one or more GeoTIFF files.
+  
+  The routine then asks you to select:
+  
+  1. a **low-resolution GeoTIFF**,
+  2. optionally a **high-resolution GeoTIFF**.
+  
+  For each DEM, the routine also asks whether:
+  
+  - topography should be preserved,
+  - bathymetry should be preserved.
 
-If plotting is enabled, the DEM is displayed as a topobathymetry map.
+##### Option B — Matlab DEM
 
-```{image} ../_static/images/mt2comsol/topobathy_04_lr_dem.png
-:alt: Low-resolution DEM
-:width: 80%
-:align: center
-```
-
-```{note}
-The low-resolution DEM is always required in the GeoTIFF workflow. It defines the background domain even when a high-resolution DEM is also used.
-```
-
-----
-
-
-## Tutorial 5 — Optionally load the high-resolution DEM
-
-If you are working with a region of special interest, you can also load a **high-resolution DEM**.
-
-This inner DEM is merged with the low-resolution DEM during the final-domain construction step.
-
-Typical use cases include:
-
-- volcanic edifices,
-- coastal sectors with sharp bathymetric gradients,
-- local high-priority target areas around MT sites.
-
-The routine merges the low- and high-resolution DEMs on a combined grid using scattered interpolation.
-
-```{image} ../_static/images/mt2comsol/topobathy_05_hr_dem.png
-:alt: High-resolution DEM
-:width: 80%
-:align: center
-```
-
-```{tip}
-Use the high-resolution DEM only where it adds real value. Very large HR domains increase memory usage and may not improve the COMSOL model significantly.
-```
+  Choose this option if you already have a MATLAB `.mat` file containing a variable named `dem`.
+  
+  The structure is expected to contain fields such as:
+  
+  - `HRdem`
+  - `unit`
+  - `R`
+  - `LAT`
+  - `LON`
+  
+  ```{warning}
+  If the selected MAT-file does not contain a variable named `dem`, the workflow stops and shows an error dialog.
+  ```
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_03_dem_source.png
+  :alt: DEM source selection
+  :width: 45%
+  :align: center
+  ```
 
 ----
 
 
-## Tutorial 6 — Optionally load an MT site variable
+#### Step 4: Load the low-resolution DEM
 
-The routine next asks whether you want to load an existing MT site variable from a MAT-file.
-
-If the selected file contains a variable named `mt`, the station coordinates are extracted and used directly.
-
-If no MT structure is provided, the routine will later ask you to generate a station grid automatically.
-
-```{image} ../_static/images/mt2comsol/topobathy_06_mt_structure.png
-:alt: MT structure selection
-:width: 70%
-:align: center
-```
-
-```{note}
-When an `mt` structure is used, station elevations are computed by interpolating the final DEM at the station positions.
-```
-
-----
-
-
-## Tutorial 7 — Build the final DEM
-
-Once the DEM(s) and optional MT structure are loaded, the routine builds the **final DEM**.
-
-This includes:
-
-- selecting the reference center,
-- merging LR and HR DEMs if both exist,
-- rebuilding the grid,
-- converting it to centered Cartesian coordinates.
-
-The reference center is chosen as follows:
-
-- from the `mt` structure if MT sites were provided,
-- otherwise from the HR DEM center if an HR DEM exists,
-- otherwise from the LR DEM center.
-
-```{image} ../_static/images/mt2comsol/topobathy_07_final_dem_latlon.png
-:alt: Final DEM in geographic coordinates
-:width: 80%
-:align: center
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_08_final_dem_xy.png
-:alt: Final DEM in centered Cartesian coordinates
-:width: 80%
-:align: center
-```
+  The low-resolution DEM defines the outer modelling region.
+  
+  After choosing the file, the routine:
+  
+  - reads the raster,
+  - fills missing values,
+  - optionally suppresses topography and/or bathymetry,
+  - applies Gaussian smoothing,
+  - converts coordinates to a centered Cartesian grid in kilometers.
+  
+  If plotting is enabled, the DEM is displayed as a topobathymetry map.
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_04_lr_dem.png
+  :alt: Low-resolution DEM
+  :width: 80%
+  :align: center
+  ```
+  
+  ```{note}
+  The low-resolution DEM is always required in the GeoTIFF workflow. It defines the background domain even when a high-resolution DEM is also used.
+  ```
 
 ----
 
 
-## Tutorial 8 — Optionally crop the DEM limits
+#### Step 5: Optionally load the high-resolution DEM
 
-The routine asks:
-
-- **Change DEM limits?**
-
-If you choose **Yes**, you can enter:
-
-- `X min (km)`
-- `X max (km)`
-- `Y min (km)`
-- `Y max (km)`
-
-The DEM is then cropped to the closest available grid indices and all derived coordinate arrays are rebuilt.
-
-```{image} ../_static/images/mt2comsol/topobathy_09_crop_dem_dialog.png
-:alt: DEM cropping dialog
-:width: 55%
-:align: center
-```
-
-```{tip}
-Cropping is useful to remove irrelevant outer areas and reduce the size of the exported topography and conductance grids.
-```
-
-----
-
-
-## Tutorial 9 — Optionally taper topography radially
-
-The workflow then asks:
-
-- **Apply radial taper to topography?**
-
-If you choose **Yes**, the routine requests two radii:
-
-- **Inner radius**: full topography is preserved.
-- **Outer radius**: topography is forced to zero.
-
-A smooth cosine taper is applied only to **positive topography**.
-
-Bathymetry remains unchanged.
-
-```{image} ../_static/images/mt2comsol/topobathy_10_taper_dialog.png
-:alt: Topography taper dialog
-:width: 55%
-:align: center
-```
-
-```{note}
-This option is useful when you want to suppress distant topography gradually while preserving the central modelling area.
-```
+  If you are working with a region of special interest, you can also load a **high-resolution DEM**.
+  
+  This inner DEM is merged with the low-resolution DEM during the final-domain construction step.
+  
+  Typical use cases include:
+  
+  - volcanic edifices,
+  - coastal sectors with sharp bathymetric gradients,
+  - local high-priority target areas around MT sites.
+  
+  The routine merges the low- and high-resolution DEMs on a combined grid using scattered interpolation.
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_05_hr_dem.png
+  :alt: High-resolution DEM
+  :width: 80%
+  :align: center
+  ```
+  
+  ```{tip}
+  Use the high-resolution DEM only where it adds real value. Very large HR domains increase memory usage and may not significantly improve the COMSOL model.
+  ```
 
 ----
 
 
-## Tutorial 10 — Extract and select coastline contours
+#### Step 6: Optionally load an MT site variable
 
-The routine extracts zero-level contours from the DEM and opens a contour-selection workflow.
-
-Optional operations include:
-
-- removing contour points outside a radius,
-- resampling contour vertices at a chosen spacing,
-- selecting only the contours you want to keep.
-
-The selected contours can later be exported as:
-
-- `Coastline.txt`
-
-```{image} ../_static/images/mt2comsol/topobathy_11_contours_all.png
-:alt: All extracted zero-level contours
-:width: 85%
-:align: center
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_12_contours_selected.png
-:alt: Selected zero-level contours
-:width: 85%
-:align: center
-```
-
-```{tip}
-If your DEM contains multiple coastlines or islands, this step lets you keep only the geometries that are relevant for your COMSOL model.
-```
+  The routine next asks whether you want to load an existing MT site variable from a MAT-file.
+  
+  If the selected file contains a variable named `mt`, the station coordinates are extracted and used directly.
+  
+  If no MT structure is provided, the routine will later ask you to generate a station grid automatically.
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_06_mt_structure.png
+  :alt: MT structure selection
+  :width: 70%
+  :align: center
+  ```
+  
+  ```{note}
+  When an `mt` structure is used, station elevations are computed by interpolating the final DEM at the station positions.
+  ```
 
 ----
 
 
-## Tutorial 11 — Define station coordinates
+#### Step 7: Build the final DEM
+
+  Once the DEM(s) and optional MT structure are loaded, the routine builds the **final DEM**.
+  
+  This includes:
+  
+  - selecting the reference center,
+  - merging LR and HR DEMs if both exist,
+  - rebuilding the grid,
+  - converting it to centered Cartesian coordinates.
+  
+  The reference center is chosen as follows:
+  
+  - from the `mt` structure if MT sites were provided,
+  - otherwise from the HR DEM center if an HR DEM exists,
+  - otherwise from the LR DEM center.
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_07_final_dem_latlon.png
+  :alt: Final DEM in geographic coordinates
+  :width: 80%
+  :align: center
+  ```
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_08_final_dem_xy.png
+  :alt: Final DEM in centered Cartesian coordinates
+  :width: 80%
+  :align: center
+  ```
+
+----
+
+
+#### Step 8: Optionally crop the DEM limits
+
+  The routine asks:
+  
+  - **Change DEM limits?**
+  
+  If you choose **Yes**, you can enter:
+  
+  - `X min (km)`
+  - `X max (km)`
+  - `Y min (km)`
+  - `Y max (km)`
+  
+  The DEM is then cropped to the closest available grid indices and all derived coordinate arrays are rebuilt.
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_09_crop_dem_dialog.png
+  :alt: DEM cropping dialog
+  :width: 55%
+  :align: center
+  ```
+  
+  ```{tip}
+  Cropping is useful to remove irrelevant outer areas and reduce the size of the exported topography and conductance grids.
+  ```
+  
+  ----
+
+
+#### Step 9: Optionally taper topography radially
+
+  The workflow then asks:
+  
+  - **Apply radial taper to topography?**
+  
+  If you choose **Yes**, the routine requests two radii:
+  
+  - **Inner radius**: full topography is preserved.
+  - **Outer radius**: topography is forced to zero.
+  
+  A smooth cosine taper is applied only to **positive topography**.
+  
+  Bathymetry remains unchanged.
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_10_taper_dialog.png
+  :alt: Topography taper dialog
+  :width: 55%
+  :align: center
+  ```
+  
+  ```{note}
+  This option is useful when you want to suppress distant topography gradually while preserving the central modelling area.
+  ```
+
+----
+
+
+#### Step 10: Extract and select coastline contours
+
+  The routine extracts zero-level contours from the DEM and opens a contour-selection workflow.
+  
+  Optional operations include:
+  
+  - removing contour points outside a radius,
+  - resampling contour vertices at a chosen spacing,
+  - selecting only the contours you want to keep.
+  
+  The selected contours can later be exported as:
+  
+  - `Coastline.txt`
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_11_contours_all.png
+  :alt: All extracted zero-level contours
+  :width: 85%
+  :align: center
+  ```
+  
+  ```{image} ../_static/images/mt2comsol/topobathy_12_contours_selected.png
+  :alt: Selected zero-level contours
+  :width: 85%
+  :align: center
+  ```
+  
+  ```{tip}
+  If your DEM contains multiple coastlines or islands, this step lets you keep only the geometries that are relevant for your COMSOL model.
+  ```
+
+----
+
+
+#### Step 11: Define station coordinates
 
 At this stage, the routine determines the station positions.
 
