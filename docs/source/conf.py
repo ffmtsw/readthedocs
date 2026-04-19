@@ -34,8 +34,14 @@ html_favicon = "_static/images/general/logo_ffmt.png"
 html_css_files = ["custom.css"]
 
 source_suffix = [".md", ".rst"]
-myst_enable_extensions = ["colon_fence", "deflist", "fieldlist", "tasklist"]
-myst_enable_extensions = ["colon_fence","html_image","attrs_inline"]
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
+    "fieldlist",
+    "tasklist",
+    "html_image",
+    "attrs_inline",
+]
 
 # html_theme_options = {
 #    "logo_only": True,                  
