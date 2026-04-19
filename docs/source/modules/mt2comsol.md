@@ -1,4 +1,4 @@
-# MT2COMSOL GUI
+# MT2COMSOL
 
 MT2COMSOL is a **GUI-based front end** to prepare model-domain inputs for COMSOL, manage the COMSOL + LiveLink session from MATLAB, and launch the MT response-extraction workflow.
 
