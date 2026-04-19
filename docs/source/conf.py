@@ -1,6 +1,6 @@
 project = "FFMT"
 author = "Cesar Daniel Castro, Maria Kamila Diaz, Philip Hering, Andreas Junge"
-release = "0.0"
+release = "1.0"
 language = "en"
 
 extensions = [
