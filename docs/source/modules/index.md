@@ -11,3 +11,4 @@ mtdim
 mt2modem
 plot3d
 mtinv
+mt2comsol
