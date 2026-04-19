@@ -132,7 +132,7 @@ It focuses on:
 
 ### Modeling Workflow
 
-- <img src="../_static/icons/information.svg" class="icon" alt="Installation status"> **Installation** (status panel): Reports whether COMSOL and LiveLink for MATLAB are available.
+- <img src="../_static/icons/panel.svg" class="icon" alt="Installation status"> **Installation** (status panel): Reports whether COMSOL and LiveLink for MATLAB are available.
 
 - <img src="../_static/icons/button.svg" class="icon" alt="Manual DEM download"> **Download DEM** (button, DEM panel): Opens the GMRT website for manual DEM download.
 
@@ -142,15 +142,15 @@ It focuses on:
 
 - <img src="../_static/icons/switch.svg" class="icon" alt="Start COMSOL session"> **Start COMSOL Session** (switch): Starts or resets the GUI-side COMSOL session.
 
-- <img src="../_static/icons/lamp_off.svg" class="icon" alt="Inactive status"> **Status lamps** (red/green): Indicate whether a COMSOL connection is inactive or active.
+- <img src="../_static/icons/lamp.svg" class="icon" alt="Inactive status"> **Status lamps** (red/green): Indicate whether a COMSOL connection is inactive or active.
 
 - <img src="../_static/icons/button.svg" class="icon" alt="Select MPH file"> **Select MPH File** (button): Opens the MT response-extraction workflow. This button is enabled only when a valid COMSOL session is active.
 
 ### Menu entries
 
-- <img src="../_static/icons/menu.svg" class="icon" alt="Anisotropy calculator"> **Tools → Anisotropy Calculator**: Opens the anisotropy-tensor calculator.
+- <img src="../_static/icons/menu_bar.svg" class="icon" alt="Anisotropy calculator"> **Tools → Anisotropy Calculator**: Opens the anisotropy-tensor calculator.
 
-- <img src="../_static/icons/menu.svg" class="icon" alt="Documentation"> **Extras → Documentation**: Opens the online documentation page for MT2COMSOL.
+- <img src="../_static/icons/menu_bar.svg" class="icon" alt="Documentation"> **Extras → Documentation**: Opens the online documentation page for MT2COMSOL.
 
 ----
 
