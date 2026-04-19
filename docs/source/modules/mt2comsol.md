@@ -1,487 +1,470 @@
-MT2COMSOL is the graphical entry point for preparing topography/bathymetry-based
-COMSOL inputs, managing the COMSOL + LiveLink connection from MATLAB, and
-launching MT-response extraction workflows.
+# MT2COMSOL GUI
 
-It is designed to guide the user through a practical sequence:
+MT2COMSOL is a **GUI-based front end** to prepare model-domain inputs for COMSOL, manage the COMSOL + LiveLink session from MATLAB, and launch the MT response-extraction workflow.
 
-* define the frequency range and estimate skin depth,
-* define the model reference coordinates and spatial extents,
-* compute geographic limits,
-* download or inspect a DEM,
-* generate COMSOL input files,
-* start a COMSOL session, and
-* extract MT responses from an ``.mph`` model.
+It focuses on:
 
-The overall structure of this page follows the same user-oriented module style
-used in the existing FFMT documentation for modules such as ReadTS and nEMesis.
+- Estimating **skin depth** from the selected MT frequency range and a reference resistivity.
+- Defining the model domain in **local Cartesian coordinates** and converting it to **geographic DEM limits**.
+- Downloading and plotting **DEM / topobathymetry** data.
+- Generating COMSOL-ready ASCII input files for topography, thin-layer conductance, site coordinates, and coastline support.
+- Starting a COMSOL server session through **LiveLink for MATLAB**.
+- Opening the next processing steps through **Anisotropy Calculator** and **response extraction** tools.
 
-* * *
+![MT2COMSOL main GUI](../_static/modules/mt2comsol_gui.png)
 
-.. figure:: ../_static/images/mt2comsol/mt2comsol_gui.png
-   :width: 100%
-   :align: center
-   :alt: MT2COMSOL main GUI
+----
 
-   Main GUI of ``MT2COMSOL``.
 
-* * *
+## Main features
 
-Main features
--------------
+### 1) Frequency and skin-depth estimation
 
-1) DEM and model-domain setup
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Define the **maximum MT frequency**.
+- Define the **minimum MT frequency**.
+- Define a **reference resistivity**.
+- Automatically compute the corresponding:
+  - **minimum skin depth** (highest frequency)
+  - **maximum skin depth** (lowest frequency)
 
-The upper half of the GUI is dedicated to defining the physical and spatial
-context of the model domain. From here, the user can:
+### 2) Reference coordinates and model-domain definition
 
-* define the frequency range of interest,
-* estimate minimum and maximum skin depth from a reference resistivity,
-* define a geographic reference center,
-* define Cartesian model extents in kilometers,
-* compute the corresponding geographic limits, and
-* configure DEM download options.
+- Enter the model center manually as:
+  - **Central Latitude [deg]**
+  - **Central Longitude [deg]**
+- Or load the center automatically from an **MT structure** stored in a `*.mat` file.
+- Define the local domain extents in kilometers:
+  - **Easting min / max**
+  - **Northing min / max**
+- Convert those limits into:
+  - **Latitude min / max**
+  - **Longitude min / max**
+  - **model area [km2]**
 
-This section is meant to help the user build a domain that is consistent with
-both the MT target depth range and the intended COMSOL model size.
+### 3) DEM download and visualization
 
-2) DEM download and quick visualization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Download DEM data manually from the **GMRT Map Tool**.
+- Download DEM data automatically from the GUI using the computed geographic limits.
+- Choose:
+  - **output format**
+  - **download resolution**
+  - whether to **plot the DEM after download**
+- Open the selected working folder directly from the GUI.
+- Plot an existing DEM / GeoTIFF file for quick inspection.
 
-MT2COMSOL provides two ways to interact with terrain data:
+### 4) COMSOL input-file generation
 
-* open the GMRT website manually for DEM download, and
-* download the DEM directly from the GUI using the computed geographic limits.
+- Launch the input-file generator for the current project folder.
+- Prepare files used later by the COMSOL workflow, including:
+  - `Topography.txt`
+  - `ThinLayer.txt`
+  - `Coordinates.txt`
+  - `Coastline.txt` (if coastline support is selected)
 
-A quick plotting utility is also available to inspect an existing DEM or
-GeoTIFF before generating the COMSOL input files.
+### 5) COMSOL connection and MT response extraction
 
-3) COMSOL input-file generation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Check whether **COMSOL** and **LiveLink for MATLAB** are available.
+- Start or stop the GUI-side COMSOL session.
+- Enable **MPH file selection** only when a valid session is active.
+- Launch the MT response-extraction workflow from a selected COMSOL model.
 
-The GUI can launch the input-file preparation workflow used to build the ASCII
-files required by the COMSOL model setup. This includes topography,
-conductance/thin-layer information, station coordinates, and optional coastline
-support files.
+### 6) Accessory tools
 
-4) COMSOL connection control
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Open the **Anisotropy Calculator** from the **Tools** menu.
+- Open the module **Documentation** from the **Extras** menu.
 
-MT2COMSOL checks whether COMSOL Server and LiveLink for MATLAB are available,
-and provides a switch to start or stop the COMSOL session from inside the GUI.
-The connection state is reflected by status lamps and by enabling/disabling the
-controls that depend on an active COMSOL session.
+----
 
-5) MT response extraction
-^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once a COMSOL session is active, the GUI enables the response-extraction step.
-This allows the user to select an ``.mph`` file and launch the workflow that
-retrieves magnetotelluric responses from the COMSOL model.
+## Main GUI components
 
-* * *
+### DEM and Model Domain Setup
 
-Main GUI components
--------------------
+- **Max. Frequency [Hz]** (numeric edit field): Sets the highest MT frequency used to estimate the shallowest skin depth.
 
-The MT2COMSOL interface is divided into two main blocks:
+- **Min. Frequency [Hz]** (numeric edit field): Sets the lowest MT frequency used to estimate the deepest skin depth.
 
-* ``DEM and Model Domain Setup``
-* ``Modeling Workflow``
+- **Resistivity [Ohmm]** (numeric edit field): Defines the reference resistivity used for the skin-depth estimate.
 
-DEM and Model Domain Setup
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+- **Skin depth min [km]** (read-only numeric field): Displays the estimated minimum skin depth.
 
-Frequency and Skin Depth
-~~~~~~~~~~~~~~~~~~~~~~~~
+- **Skin depth max [km]** (read-only numeric field): Displays the estimated maximum skin depth.
 
-* ``Max. Frequency [Hz]`` (numeric field): Highest MT frequency used to estimate
-  the shallowest skin depth.
+- **Central Latitude [deg]** (numeric edit field): Sets the reference latitude of the model domain.
 
-* ``Min. Frequency [Hz]`` (numeric field): Lowest MT frequency used to estimate
-  the deepest skin depth.
+- **Central Longitude [deg]** (numeric edit field): Sets the reference longitude of the model domain.
 
-* ``Resistivity [Ohm m]`` (numeric field): Reference resistivity used for the
-  skin-depth estimate.
+- **Use Center from MT Structure** (button): Loads a `*.mat` file, reads the variable `mt`, and uses its center as the domain reference.
 
-* ``Skin depth min [km]`` (read-only): Estimated minimum skin depth associated
-  with the highest frequency.
+- **Easting min. [km]** (numeric edit field): Minimum x-extent relative to the reference center.
 
-* ``Skin depth max [km]`` (read-only): Estimated maximum skin depth associated
-  with the lowest frequency.
+- **Easting max. [km]** (numeric edit field): Maximum x-extent relative to the reference center.
 
-The skin-depth values are updated automatically whenever the frequency range or
-reference resistivity changes.
+- **Northing min. [km]** (numeric edit field): Minimum y-extent relative to the reference center.
 
-Reference Coordinates
-~~~~~~~~~~~~~~~~~~~~~
+- **Northing max. [km]** (numeric edit field): Maximum y-extent relative to the reference center.
 
-* ``Central Latitude [deg]`` (numeric field): Reference latitude of the model
-  center.
+- **Calculate Limits** (button): Converts the local extents into geographic limits and computes the total area.
 
-* ``Central Longitude [deg]`` (numeric field): Reference longitude of the model
-  center.
+- **Latitude min. [deg]** (read-only numeric field): Southern geographic limit of the DEM window.
 
-* ``Use Center from MT Structure`` (button): Loads an ``mt`` structure from a
-  ``.mat`` file and uses its center as the domain reference coordinates.
+- **Latitude max. [deg]** (read-only numeric field): Northern geographic limit of the DEM window.
 
-This is useful when the COMSOL model should be centered directly on an existing
-MT survey.
+- **Longitude min. [deg]** (read-only numeric field): Western geographic limit of the DEM window.
 
-Domain Extents
-~~~~~~~~~~~~~~
+- **Longitude max. [deg]** (read-only numeric field): Eastern geographic limit of the DEM window.
 
-* ``Easting min. [km]`` (numeric field): Minimum x extent relative to the
-  reference center.
+- **Area [km2]** (read-only numeric field): Displays the area of the selected domain.
 
-* ``Easting max. [km]`` (numeric field): Maximum x extent relative to the
-  reference center.
+- **Format** (drop-down): Selects the DEM output format requested from the automatic download workflow.
 
-* ``Northing min. [km]`` (numeric field): Minimum y extent relative to the
-  reference center.
+- **Resolution** (drop-down): Selects the DEM sampling density.
 
-* ``Northing max. [km]`` (numeric field): Maximum y extent relative to the
-  reference center.
+- **Plot DEM** (check box): If enabled, plots the DEM immediately after download.
 
-* ``Calculate Limits`` (button): Converts the Cartesian domain extents into
-  geographic limits and computes the total area.
+- **Select Folder** (button): Chooses the working folder where DEM and COMSOL input files will be stored.
 
-Geographic Limits
-~~~~~~~~~~~~~~~~~
+- **Folder** (read-only text field): Displays the selected project folder.
 
-* ``Latitude min. [deg]`` (read-only): Southern geographic limit.
+- **Download DEM** (button): Downloads the DEM for the current geographic limits using the selected settings.
 
-* ``Latitude max. [deg]`` (read-only): Northern geographic limit.
+- **Open Folder** (button): Opens the selected working directory in the system file explorer.
 
-* ``Longitude min. [deg]`` (read-only): Western geographic limit.
+### Modeling Workflow
 
-* ``Longitude max. [deg]`` (read-only): Eastern geographic limit.
+- **Installation** (status panel): Reports whether COMSOL and LiveLink for MATLAB are available.
 
-* ``Area [km2]`` (read-only): Estimated model area based on the selected x/y
-  limits.
+- **Download DEM** (button, DEM panel): Opens the GMRT website for manual DEM download.
 
-These values are computed from the reference coordinates and the Cartesian
-model extents.
+- **Plot DEM** (button, DEM panel): Opens the DEM plotting utility.
 
-DEM Download Settings
-~~~~~~~~~~~~~~~~~~~~~
+- **Create Input Files** (button): Launches the COMSOL input-file generator for the selected project folder.
 
-* ``Format`` (drop-down): DEM output format requested from GMRT.
+- **Start COMSOL Session** (slider switch): Starts or resets the GUI-side COMSOL session.
 
-* ``Resolution`` (drop-down): DEM sampling resolution.
+- **Status lamps** (red/green): Indicate whether a COMSOL connection is inactive or active.
 
-* ``Plot DEM`` (checkbox): If enabled, plots the DEM after download.
+- **Select MPH File** (button): Opens the MT response-extraction workflow. This button is enabled only when a valid COMSOL session is active.
 
-* ``Select Folder`` (button): Defines the destination folder for downloaded DEM
-  files and generated outputs.
+### Menu entries
 
-* ``Folder`` (read-only text field): Displays the currently selected output
-  folder.
+- **Tools → Anisotropy Calculator**: Opens the anisotropy-tensor calculator.
 
-* ``Download DEM`` (button): Downloads the DEM for the computed geographic
-  limits using the selected format and resolution.
+- **Extras → Documentation**: Opens the online documentation page for MT2COMSOL.
 
-* ``Open Folder`` (button): Opens the selected destination folder in the system
-  file explorer.
+----
 
-Modeling Workflow
-^^^^^^^^^^^^^^^^^
 
-Installation
-~~~~~~~~~~~~
+## DEM and model-domain setup
 
-This panel reports whether COMSOL and LiveLink for MATLAB were detected.
-Depending on the environment, the panel shows either:
+### Frequency range and skin-depth estimate
 
-* a positive installation message, or
-* a warning indicating that COMSOL, LiveLink, or both were not detected.
+The **Frequency and Skin Depth** panel is the natural starting point of the GUI.
+You provide:
 
-DEM
-~~~
+- the highest frequency,
+- the lowest frequency,
+- and a reference resistivity,
 
-* ``Download DEM`` (button): Opens the GMRT website in the browser for manual
-  DEM download.
+and the GUI updates the expected shallow and deep skin-depth estimates automatically.
 
-* ``Plot DEM`` (button): Launches a quick DEM plotting utility.
+This is useful as a quick planning tool before defining the final domain size.
+It gives a first-order idea of the spatial scale that may be relevant for the model.
 
-This panel is useful when the user wants to inspect terrain data before
-starting the COMSOL input-file workflow.
+```{note}
+The shallowest skin depth is linked to the **highest frequency**, while the deepest skin depth is linked to the **lowest frequency**.
+```
 
-Model Input Files
-~~~~~~~~~~~~~~~~~
+### Reference coordinates
 
-* ``Create Input Files`` (button): Launches the topography/thin-layer workflow
-  that generates the COMSOL support files.
+The **Reference Coordinates** panel defines the center of the working domain.
+You can either:
 
-This is the main entry point for preparing the ASCII files required by the
-model setup.
+- type the latitude and longitude manually, or
+- press **Use Center from MT Structure** to load the center automatically from a saved `mt` structure.
 
-COMSOL Connection
-~~~~~~~~~~~~~~~~~
+This center is later used to:
 
-* ``Start COMSOL Session`` (switch): Starts or resets the COMSOL session from
-  inside MATLAB.
+- define local x/y coordinates in kilometers,
+- convert between local and geographic coordinates,
+- and compute DEM download limits.
 
-* Left lamp: OFF / inactive session state.
+### Domain extents in kilometers
 
-* Right lamp: ON / active COMSOL connection state.
+The **Domain Extents** panel defines the model size relative to the reference center.
+The four fields represent the minimum and maximum local limits:
 
-When the session is active, controls that depend on COMSOL become available.
+- `xmin`, `xmax`
+- `ymin`, `ymax`
 
-Results
-~~~~~~~
+all in **kilometers**.
 
-* ``Extract MT responses`` (label): Indicates the final workflow stage.
+These limits define the area that will later be converted into geographic coordinates for DEM download and topography preparation.
 
-* ``Select MPH File`` (button): Selects a COMSOL ``.mph`` model and launches
-  MT response extraction.
+### Geographic limits and area
 
-This button is disabled until a valid COMSOL session is active.
+After defining the center and local extents, press **Calculate Limits**.
+The GUI converts the local domain into:
 
-Menu entries
-^^^^^^^^^^^^
+- latitude min / max,
+- longitude min / max,
+- and total area in square kilometers.
 
-Tools
-~~~~~
+These fields are read-only because they are derived values.
 
-* ``Anisotropy Calculator``: Opens the MT2COMSOL anisotropy calculator.
+```{tip}
+A practical workflow is: first define the local domain in kilometers, then use **Calculate Limits**, and only after that proceed to DEM download.
+```
 
-Extras
-~~~~~~
+### DEM download settings
 
-* ``Documentation``: Opens the MT2COMSOL documentation page in the browser.
+The **DEM Download Settings** panel controls the automatic DEM request.
+You can define:
 
-* * *
+- the file format,
+- the resolution,
+- whether the DEM should be plotted after download,
+- and the destination folder.
 
-DEM and model-domain workflow
------------------------------
+The folder selected here is reused later by the input-file generator.
 
-Frequency range and skin-depth estimate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+```{warning}
+In the current GUI workflow, automatic DEM download is effectively implemented for **GeoTIFF** output.
+If another format is selected, the GUI reports that it is not yet supported.
+```
 
-Start by defining the maximum frequency, minimum frequency, and a reference
-resistivity. MT2COMSOL uses these values to compute a first-order estimate of
-how shallow and how deep the model should remain meaningful for the intended MT
-response range.
+----
 
-This estimate does not replace a full sensitivity analysis, but it is a useful
-practical guide when choosing the vertical and lateral domain size.
 
-Reference center
-^^^^^^^^^^^^^^^^
+## DEM utilities
 
-Next, define the geographic center of the model. This can be done either:
+### Download DEM (manual GMRT access)
 
-* manually, by typing latitude and longitude, or
-* automatically, by loading an ``mt`` structure and using its center.
+The **Download DEM** button in the **DEM** panel opens the **GMRT Map Tool** in your web browser.
+This is useful when you want to download the terrain manually instead of using the automatic workflow.
 
-Using the survey center is recommended when the COMSOL model is meant to be
-aligned with an existing MT array.
+```{note}
+The GUI displays an information message recommending **GeoTIFF** files for the downstream MT2COMSOL workflow.
+```
 
-Cartesian model extents
-^^^^^^^^^^^^^^^^^^^^^^^
+### Plot DEM
 
-Enter the x and y domain limits in kilometers relative to the selected
-reference center. These values define the lateral size of the model in local
-Cartesian coordinates.
+The **Plot DEM** button opens the DEM plotting utility.
+This is intended for quick visual inspection of an existing DEM or GeoTIFF file before running the model-building workflow.
 
-Once the extents are defined, click ``Calculate Limits`` to obtain the
-corresponding latitude/longitude window and the total model area.
+----
 
-DEM download settings
-^^^^^^^^^^^^^^^^^^^^^
 
-After the geographic limits are available, define the DEM format, sampling
-resolution, destination folder, and whether the DEM should be plotted
-immediately after download.
+## COMSOL workflow
 
-At this stage, the GUI is ready to retrieve terrain data directly from GMRT or
-use an already available DEM in a later workflow.
+### Installation status
 
-* * *
+The **Installation** panel checks whether the environment can see:
 
-COMSOL workflow
----------------
+- the COMSOL server executable,
+- and **LiveLink for MATLAB**.
 
-Installation check
-^^^^^^^^^^^^^^^^^^
+Depending on the result, the GUI displays either:
 
-When the GUI starts, MT2COMSOL checks whether the required COMSOL components
-can be detected:
+- a ready/active message, or
+- a warning indicating which component was not detected.
 
-* COMSOL Server executable
-* LiveLink for MATLAB
+### Create input files
 
-This status is reported in the ``Installation`` panel.
+The **Create Input Files** button launches the topography / thin-layer preparation workflow for the selected project folder.
+This step is the bridge between DEM preparation and COMSOL model building.
 
-Start COMSOL session
-^^^^^^^^^^^^^^^^^^^^
+The detailed behavior of this workflow will be documented in the dedicated **input-files tutorial**.
 
-Use the session switch in the ``COMSOL Connection`` panel to start the COMSOL
-server and connect MATLAB through LiveLink. If the connection is successful,
-MT2COMSOL updates the status lamps and enables the response-extraction button.
+### Start COMSOL session
 
-If the session is turned off from the GUI, the interface is reset visually.
-Depending on the system state, an external COMSOL server process may still need
-to be closed manually.
+The **Start COMSOL Session** switch attempts to:
 
-Extract MT responses
-^^^^^^^^^^^^^^^^^^^^
+1. detect a valid COMSOL installation,
+2. launch the COMSOL server,
+3. prioritize the corresponding LiveLink MATLAB path,
+4. connect MATLAB to COMSOL through `mphstart`.
 
-After the COMSOL session is active, click ``Select MPH File`` in the
-``Results`` panel to choose the COMSOL model file and launch the MT-response
-extraction workflow.
+When successful:
 
-This is the final stage of the main GUI workflow.
+- the green lamp turns on,
+- the red lamp turns gray,
+- and **Select MPH File** becomes available.
 
-* * *
+When the switch is moved to **Off**, the GUI session is reset visually.
 
-Quick start (step-by-step tutorials)
-------------------------------------
+```{warning}
+Setting the switch to **Off** resets the GUI-side session state, but it does **not** force-close an external COMSOL server process.
+If needed, that process must be closed manually.
+```
 
-Tutorial 1 — Define the frequency range
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Extract MT responses
 
-1. Open ``MT2COMSOL``.
-2. In ``Frequency and Skin Depth``, enter:
+The **Select MPH File** button launches the MT response-extraction workflow.
+This step is intentionally blocked until a valid COMSOL session is active.
 
-   * ``Max. Frequency [Hz]``
-   * ``Min. Frequency [Hz]``
-   * ``Resistivity [Ohm m]``
+That prevents users from attempting response extraction before the MATLAB–COMSOL connection is ready.
 
-3. Verify that ``Skin depth min [km]`` and ``Skin depth max [km]`` update
-   correctly.
-4. Use these values as a first guide for the intended model depth range.
+----
 
-Tutorial 2 — Define the model center
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. In ``Reference Coordinates``, either type the central latitude/longitude
-   manually or click ``Use Center from MT Structure``.
-2. If using an MT structure, select a ``.mat`` file containing the variable
-   ``mt``.
-3. Verify that the center coordinates are updated in the GUI.
+## Quick start (step-by-step tutorials)
 
-Tutorial 3 — Define domain extents and compute geographic limits
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Tutorial 1 — Define the frequency range and inspect skin depth
 
-1. In ``Domain Extents``, enter:
+1. Open the **Frequency and Skin Depth** panel.
+2. Enter:
+   - **Max. Frequency [Hz]**
+   - **Min. Frequency [Hz]**
+   - **Resistivity [Ohmm]**
+3. Inspect the automatically updated:
+   - **Skin depth min [km]**
+   - **Skin depth max [km]**
 
-   * ``Easting min. [km]``
-   * ``Easting max. [km]``
-   * ``Northing min. [km]``
-   * ``Northing max. [km]``
+```{tip}
+Use this first estimate as a planning guide for choosing reasonable domain extents before downloading the DEM.
+```
 
-2. Click ``Calculate Limits``.
-3. Verify the resulting values in ``Geographic Limits``.
-4. Check the estimated total area.
+### Tutorial 2 — Define the reference center and local model extents
 
-Tutorial 4 — Download a DEM from the GUI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. In **Reference Coordinates**, either:
+   - type **Central Latitude / Longitude**, or
+   - click **Use Center from MT Structure** and select a `*.mat` file containing `mt`
+2. In **Domain Extents**, define:
+   - **Easting min / max [km]**
+   - **Northing min / max [km]**
+3. Click **Calculate Limits**
+4. Inspect the resulting:
+   - geographic limits,
+   - and **Area [km2]**
 
-1. In ``DEM Download Settings``, choose the output format and resolution.
-2. Click ``Select Folder`` and choose a destination directory.
-3. Optionally enable ``Plot DEM``.
-4. Click ``Download DEM``.
-5. Inspect the downloaded files in the selected folder.
+```{note}
+The geographic limits are computed from the local x/y box and the selected reference center. They are not meant to be edited directly from this panel.
+```
 
-Tutorial 5 — Create COMSOL input files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Tutorial 3 — Download a DEM automatically from the GUI
 
-1. Make sure a valid output folder is selected.
-2. Click ``Create Input Files``.
-3. Follow the dialogs used by the input-file workflow.
-4. Inspect the generated ASCII support files in the project folder.
+1. Define the domain as described above.
+2. In **DEM Download Settings**, choose:
+   - **Format**
+   - **Resolution**
+   - whether **Plot DEM** should be enabled
+3. Click **Select Folder** and choose the project directory.
+4. Click **Download DEM**.
+5. If successful, the DEM is saved in the selected folder.
 
-A dedicated tutorial for this workflow is provided separately in the
-MT2COMSOL documentation because it includes multiple options such as DEM
-source selection, station generation, coastline extraction, thin-layer
-construction, and optional sediment conductance.
+```{warning}
+The automatic download workflow requires valid latitude/longitude limits and a valid destination folder.
+If either is missing, the GUI will stop and show a warning dialog.
+```
 
-Tutorial 6 — Start COMSOL and connect MATLAB
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Tutorial 4 — Open the GMRT website and download manually
 
-1. Check the ``Installation`` panel.
-2. In ``COMSOL Connection``, switch ``Start COMSOL Session`` to ON.
-3. Wait for the GUI to finish launching the COMSOL server and LiveLink.
-4. Confirm that the ON lamp becomes active.
+1. In the **DEM** panel, click **Download DEM**.
+2. Your browser opens the **GMRT Map Tool**.
+3. Download the terrain product manually.
+4. Prefer **GeoTIFF** output for the standard MT2COMSOL workflow.
 
-Tutorial 7 — Extract MT responses from an MPH file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Tutorial 5 — Create COMSOL input files
+
+1. Make sure a valid **project folder** is selected.
+2. Click **Create Input Files**.
+3. Follow the dialogs of the input-file workflow.
+4. The project folder will be populated with COMSOL-ready ASCII files.
+
+```{tip}
+This is the main preparation step before building the COMSOL model itself.
+A separate tutorial should document this workflow in detail with screenshots and example files.
+```
+
+### Tutorial 6 — Start a COMSOL session
+
+1. Go to the **COMSOL Connection** panel.
+2. Move **Start COMSOL Session** to **On**.
+3. Wait for the server launch and MATLAB connection.
+4. Confirm that:
+   - the green lamp is active,
+   - and **Select MPH File** is enabled.
+
+```{note}
+If MATLAB is already connected to a COMSOL server, the GUI keeps the session active instead of failing.
+```
+
+### Tutorial 7 — Extract MT responses from an MPH file
 
 1. Start a valid COMSOL session.
-2. In ``Results``, click ``Select MPH File``.
-3. Choose the target ``.mph`` file.
-4. Follow the extraction workflow.
+2. Click **Select MPH File**.
+3. Choose the COMSOL model file.
+4. Continue with the response-extraction workflow.
 
-* * *
+```{warning}
+If the button is disabled, the COMSOL connection has not been initialized yet.
+Start the session first.
+```
 
-Troubleshooting
----------------
+### Tutorial 8 — Open auxiliary tools
 
-COMSOL or LiveLink was not detected
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Use **Tools → Anisotropy Calculator** to open the anisotropy-tensor utility.
+- Use **Extras → Documentation** to open the online MT2COMSOL documentation.
 
-If the ``Installation`` panel reports missing components, verify that:
+----
 
-* COMSOL is installed,
-* the COMSOL server executable is available on the MATLAB path or can be
-  detected by the environment, and
-* LiveLink for MATLAB is installed and visible to MATLAB.
 
-Cannot start COMSOL session
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Troubleshooting
 
-If the session switch fails to start the connection:
+### “COMSOL and LiveLink for MATLAB were not detected”
 
-1. verify that the detected COMSOL installation includes both Server and
-   LiveLink,
-2. check whether another session is already connected,
-3. confirm that the COMSOL server executable can be launched from the system,
-4. restart MATLAB and try again.
+- Verify that COMSOL is installed on the machine.
+- Verify that **LiveLink for MATLAB** is installed and accessible from MATLAB.
+- Check that the COMSOL server executable can be found by the current environment.
 
-``Select MPH File`` is disabled
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### “No COMSOL installation with both Server and LiveLink was found”
 
-This button is enabled only when the COMSOL session is active. Start a valid
-COMSOL session first.
+- MATLAB may see a partial installation only.
+- Confirm that the selected COMSOL version includes both:
+  - server support,
+  - and LiveLink for MATLAB.
 
-DEM download fails
-^^^^^^^^^^^^^^^^^^
+### The COMSOL session does not start
 
-Check the following:
+- Check whether the COMSOL server executable can be launched outside the GUI.
+- Confirm that MATLAB can run `mphstart` successfully.
+- If another session is already active, close it or reuse it intentionally.
 
-* the geographic limits were computed correctly,
-* latitude min is smaller than latitude max,
-* longitude min is smaller than longitude max,
-* the selected output folder exists.
+### “Select MPH File” stays disabled
 
-Cannot create input files
-^^^^^^^^^^^^^^^^^^^^^^^^^
+- The button is enabled only after a successful COMSOL connection.
+- Start the session first using **Start COMSOL Session**.
+- If the connection fails, inspect the COMSOL / LiveLink installation.
 
-Make sure that:
+### DEM download fails
 
-* a valid project/output folder is selected,
-* the DEM source is available,
-* the input-file workflow completes without cancellation,
-* all required auxiliary files are accessible.
+- Verify that **Latitude min/max** and **Longitude min/max** were computed correctly.
+- Verify that the selected project folder exists.
+- Prefer **GeoTIFF** format for the automatic workflow.
 
-No valid destination folder
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### “The selected DEM format is not yet supported”
 
-If MT2COMSOL reports an invalid destination folder:
+- In the current GUI implementation, choose **geotiff (.tif)** for automatic download.
+- Other formats may appear in the drop-down, but they are not yet wired into the download workflow.
 
-1. click ``Select Folder``,
-2. choose an existing directory,
-3. verify that the path appears in the folder field,
-4. try the action again.
+### Skin depth does not update
 
-* * *
+- Check that frequency and resistivity values are positive.
+- Ensure that **Min. Frequency** is not greater than **Max. Frequency**.
 
-Related pages
--------------
+### “Failed to create input files”
 
-* ``MT2COMSOL DEM workflow``
-* ``MT2COMSOL input-file tutorial``
-* ``MT2COMSOL anisotropy calculator``
-* ``MT2COMSOL response extraction``
+- Verify that the project folder exists and is writable.
+- Check that the DEM and required auxiliary files are available.
+- Review the detailed error message shown by the GUI.
+
+### “The selected MAT-file does not contain a variable named mt”
+
+- The **Use Center from MT Structure** workflow expects a variable called `mt` inside the selected `*.mat` file.
+- Rename or rebuild the file if needed.
+
+```{note}
+The current session-management utilities are strongly oriented toward a **Windows + MATLAB + COMSOL LiveLink** setup.
+This is especially relevant for server launching and folder opening.
+```
