@@ -302,116 +302,114 @@ It can also save:
 
 #### 1) DEM input from GeoTIFF or MATLAB DEM
 
-The workflow supports two DEM entry paths:
+  The workflow supports two DEM entry paths:
 
-- **GeoTIFF DEMs** (`*.tif`)
-- **MATLAB DEM structures** (`*.mat`, containing variable `dem`)
+  - **GeoTIFF DEMs** (`*.tif`)
+  - **MATLAB DEM structures** (`*.mat`, containing variable `dem`)
 
-For GeoTIFF workflows, the routine expects at least one **low-resolution DEM**, and it also allows an optional **high-resolution DEM**.
+  For GeoTIFF workflows, the routine expects at least one **low-resolution DEM** and optionally a **high-resolution DEM**.
 
-### 2) Flexible topography / bathymetry handling
+#### 2) Flexible topography / bathymetry handling
 
-For each DEM, the user can decide whether to preserve:
+  For each DEM, the user can decide whether to preserve:
 
-- **Topography**
-- **Bathymetry**
-- **Both**
+  - **Topography**
+  - **Bathymetry**
+  - **Both**
 
-This is useful when preparing models for:
+  This is useful when preparing models for:
 
-- continental domains,
-- coastal domains,
-- ocean-influenced MT forward modelling.
+  - continental domains,
+  - coastal domains,
+  - ocean-influenced MT forward modelling.
 
-### 3) Optional MT site input
+#### 3) Optional MT site input
 
-The workflow can either:
+  The workflow can either:
 
-- read an existing `mt` structure from a MAT-file, or
-- generate a new station grid automatically.
+  - read an existing `mt` structure from a MAT-file, or
+  - generate a new station grid automatically.
 
-If no MT site variable is provided, the routine creates a synthetic site distribution and saves it as `mt2comsol.mat`.
+  If no MT site variable is provided, the routine creates a synthetic site distribution and saves it as `mt2comsol.mat`.
 
-### 4) DEM refinement and domain control
+#### 4) DEM refinement and domain control
 
-The routine can:
+  The routine can:
+  
+  - merge low- and high-resolution DEMs,
+  - crop the final model domain,
+  - apply a radial taper to positive topography,
+  - convert geographic grids into centered Cartesian coordinates.
 
-- merge low- and high-resolution DEMs,
-- crop the final model domain,
-- apply a radial taper to positive topography,
-- convert geographic grids into centered Cartesian coordinates.
+#### 5) Coastline and support-point generation
 
-### 5) Coastline and support-point generation
+  The workflow can extract zero-level contours from the DEM and export them as coastline support points.  
+  It can also generate circular support-point clouds around stations to improve local topographic control near MT sites.
 
-The workflow can extract zero-level contours from the DEM and export them as coastline support points.
+#### 6) Thin-layer conductance generation
 
-It can also generate circular support-point clouds around stations to improve local topographic control near MT sites.
-
-### 6) Thin-layer conductance generation
-
-The routine builds a thin-layer conductance model that combines:
-
-- a user-defined background resistivity,
-- ocean conductance derived from bathymetry,
-- optional sediment conductance.
+  The routine builds a thin-layer conductance model that combines:  
+  - a user-defined background resistivity,
+  - ocean conductance derived from bathymetry,
+  - optional sediment conductance.
 
 ----
 
 
-## Before you start
+#### Before you start
 
-Before running `MT2COMSOL_TopoBathy`, make sure you have:
+  Before running `MT2COMSOL_TopoBathy.m`, make sure you have:
+  
+  - a project folder where the output files will be written,
+  - at least one DEM:
+    - a low-resolution GeoTIFF, or
+    - a MATLAB DEM structure,
+  - optionally:
+    - a high-resolution GeoTIFF,
+    - an MT structure stored in a MAT-file,
+    - a sediment-thickness raster if you want to include sediments.
+  
+  ```{note}
+  The routine is highly interactive. Several choices are made through dialog windows, including DEM source, plotting, cropping, tapering, coastline selection, support points, and thin-layer settings.
+  ```
+  
+  ```{warning}
+  If you choose the sediment option, the current implementation expects a raster file named `sediments_centered_0.tif` to be available to MATLAB.
+  ```
+  
+  ----
 
-- a project folder where the output files will be written,
-- at least one DEM:
-  - a low-resolution GeoTIFF, or
-  - a MATLAB DEM structure,
-- optionally:
-  - a high-resolution GeoTIFF,
-  - an MT structure stored in a MAT-file,
-  - a sediment-thickness raster if you want to include sediments.
 
-```{note}
-The routine is highly interactive. Several choices are made through dialog windows, including DEM source, plotting, cropping, tapering, coastline selection, support points, and thin-layer settings.
-```
+#### General workflow
 
-```{warning}
-If you choose the sediment option, the current implementation expects a raster file named `sediments_centered_0.tif` to be available to MATLAB.
-```
+  The complete workflow can be summarized as follows:
+  
+  1. Select the **project folder**.
+  2. Decide whether to **plot diagnostic results**.
+  3. Choose the DEM source:
+     - **GeoTIF**
+     - **Matlab DEM**
+  4. Load the **low-resolution DEM**.
+  5. Optionally load the **high-resolution DEM**.
+  6. Optionally load an **MT site variable**.
+  7. Build the **final DEM**.
+  8. Optionally **crop** the final DEM.
+  9. Optionally apply a **radial taper** to topography.
+  10. Extract and select **zero-level coastline contours**.
+  11. Define station coordinates:
+      - from the existing `mt` structure, or
+      - from an automatically generated grid.
+  12. Optionally generate **support points around stations**.
+  13. Export **Topography.txt** and **Coordinates.txt**.
+  14. Define background resistivity and build the **thin-layer conductance**.
+  15. Optionally include **sediment conductance**.
+  16. Export **ThinLayer.txt** and, if selected, **Coastline.txt**.
+  17. Save or print an **info** summary.
 
 ----
 
 
-## General workflow
-
-The complete workflow can be summarized as follows:
-
-1. Select the **project folder**.
-2. Decide whether to **plot diagnostic results**.
-3. Choose the DEM source:
-   - **GeoTIF**
-   - **Matlab DEM**
-4. Load the **low-resolution DEM**.
-5. Optionally load the **high-resolution DEM**.
-6. Optionally load an **MT site variable**.
-7. Build the **final DEM**.
-8. Optionally **crop** the final DEM.
-9. Optionally apply a **radial taper** to topography.
-10. Extract and select **zero-level coastline contours**.
-11. Define station coordinates:
-    - from the existing `mt` structure, or
-    - from an automatically generated grid.
-12. Optionally generate **support points around stations**.
-13. Export **Topography.txt** and **Coordinates.txt**.
-14. Define background resistivity and build the **thin-layer conductance**.
-15. Optionally include **sediment conductance**.
-16. Export **ThinLayer.txt** and, if selected, **Coastline.txt**.
-17. Save or print an **info** summary.
-
-----
-
-
-## Tutorial 1 — Start the workflow and select the project folder
+#### Step 1 — Start the workflow and select the project folder
 
 Run the function from MATLAB:
 
