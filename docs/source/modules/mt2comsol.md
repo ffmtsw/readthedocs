@@ -11,7 +11,6 @@ It focuses on:
 - Starting a COMSOL server session through **LiveLink for MATLAB**.
 - Opening the next processing steps through **Anisotropy Calculator** and **response extraction** tools.
 
-![MT2COMSOL main GUI](../_static/images/mt2comsol/mt2comsol_gui.png)
 
 ----
 
@@ -77,6 +76,8 @@ It focuses on:
 
 
 ## Main GUI components
+
+![MT2COMSOL main GUI](../_static/images/mt2comsol/mt2comsol_gui.png)
 
 ### DEM and Model Domain Setup
 
