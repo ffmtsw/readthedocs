@@ -356,7 +356,7 @@ It can also save:
 ----
 
 
-#### Before you start
+### Before you start
 
   Before running `MT2COMSOL_TopoBathy.m`, make sure you have:
   
@@ -380,7 +380,7 @@ It can also save:
   ----
 
 
-#### General workflow
+### General workflow
 
   The complete workflow can be summarized as follows:
   
@@ -409,7 +409,7 @@ It can also save:
 ----
 
 
-#### Step 1 — Start the workflow and select the project folder
+#### Step 1: Start the workflow and select the project folder
 
 Run the function from MATLAB:
 
@@ -432,7 +432,7 @@ Create one dedicated folder per COMSOL model setup. This keeps the exported ASCI
 ----
 
 
-## Tutorial 2 — Choose whether to plot diagnostic results
+## Step 2: Choose whether to plot diagnostic results
 
 After selecting the project folder, the routine asks:
 
