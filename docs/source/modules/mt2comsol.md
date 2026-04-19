@@ -11,13 +11,10 @@ It focuses on:
 - Starting a COMSOL server session through **LiveLink for MATLAB**.
 - Opening the next processing steps through **Anisotropy Calculator** and **response extraction** tools.
 
-```{figure} ../_static/modules/mt2comsol_gui.png
-:width: 70%
-:align: center
-:alt: MT2COMSOL main GUI
-
+:::{figure-md} mt2comsol-gui
+<img src="../_static/modules/mt2comsol_gui.png" alt="MT2COMSOL main GUI" width="70%">
 Main GUI of `MT2COMSOL`.
-```
+:::
 
 ----
 
