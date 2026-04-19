@@ -271,10 +271,776 @@ Depending on the result, the GUI displays either:
 
 ### Create input files
 
-The **Create Input Files** button launches the topography / thin-layer preparation workflow for the selected project folder.
+The **Create Input Files** button launches the workflow to prepare topography, bathymetry, coastline, station coordinates, and thin-layer conductance files for COMSOL using the function `MT2COMSOL_TopoBathy.m`.
 This step is the bridge between DEM preparation and COMSOL model building.
 
-The detailed behavior of this workflow will be documented in the dedicated **input-files tutorial**.
+It guides the user through an interactive sequence that can include:
+
+- Loading a **low-resolution DEM**.
+- Optionally merging a **high-resolution DEM**.
+- Using an existing **MT site variable**, or generating stations automatically.
+- Cropping the final DEM domain.
+- Optionally tapering topography radially.
+- Extracting and selecting **coastline contours**.
+- Generating **station support points**.
+- Building the **topography** and **thin-layer conductance** files required by COMSOL.
+- Optionally including a **sediment conductance** contribution.
+
+The routine exports four main ASCII files:
+
+- `Topography.txt`
+- `ThinLayer.txt`
+- `Coordinates.txt`
+- `Coastline.txt` (if coastline contours are selected)
+
+It can also save:
+
+- `mt2comsol.mat` (if stations are generated automatically)
+- `info.mat` or `info.txt`
+
+#### Main features
+
+#### 1) DEM input from GeoTIFF or MATLAB DEM
+
+The workflow supports two DEM entry paths:
+
+- **GeoTIFF DEMs** (`*.tif`)
+- **MATLAB DEM structures** (`*.mat`, containing variable `dem`)
+
+For GeoTIFF workflows, the routine expects at least one **low-resolution DEM**, and it also allows an optional **high-resolution DEM**.
+
+### 2) Flexible topography / bathymetry handling
+
+For each DEM, the user can decide whether to preserve:
+
+- **Topography**
+- **Bathymetry**
+- **Both**
+
+This is useful when preparing models for:
+
+- continental domains,
+- coastal domains,
+- ocean-influenced MT forward modelling.
+
+### 3) Optional MT site input
+
+The workflow can either:
+
+- read an existing `mt` structure from a MAT-file, or
+- generate a new station grid automatically.
+
+If no MT site variable is provided, the routine creates a synthetic site distribution and saves it as `mt2comsol.mat`.
+
+### 4) DEM refinement and domain control
+
+The routine can:
+
+- merge low- and high-resolution DEMs,
+- crop the final model domain,
+- apply a radial taper to positive topography,
+- convert geographic grids into centered Cartesian coordinates.
+
+### 5) Coastline and support-point generation
+
+The workflow can extract zero-level contours from the DEM and export them as coastline support points.
+
+It can also generate circular support-point clouds around stations to improve local topographic control near MT sites.
+
+### 6) Thin-layer conductance generation
+
+The routine builds a thin-layer conductance model that combines:
+
+- a user-defined background resistivity,
+- ocean conductance derived from bathymetry,
+- optional sediment conductance.
+
+----
+
+
+## Before you start
+
+Before running `MT2COMSOL_TopoBathy`, make sure you have:
+
+- a project folder where the output files will be written,
+- at least one DEM:
+  - a low-resolution GeoTIFF, or
+  - a MATLAB DEM structure,
+- optionally:
+  - a high-resolution GeoTIFF,
+  - an MT structure stored in a MAT-file,
+  - a sediment-thickness raster if you want to include sediments.
+
+```{note}
+The routine is highly interactive. Several choices are made through dialog windows, including DEM source, plotting, cropping, tapering, coastline selection, support points, and thin-layer settings.
+```
+
+```{warning}
+If you choose the sediment option, the current implementation expects a raster file named `sediments_centered_0.tif` to be available to MATLAB.
+```
+
+----
+
+
+## General workflow
+
+The complete workflow can be summarized as follows:
+
+1. Select the **project folder**.
+2. Decide whether to **plot diagnostic results**.
+3. Choose the DEM source:
+   - **GeoTIF**
+   - **Matlab DEM**
+4. Load the **low-resolution DEM**.
+5. Optionally load the **high-resolution DEM**.
+6. Optionally load an **MT site variable**.
+7. Build the **final DEM**.
+8. Optionally **crop** the final DEM.
+9. Optionally apply a **radial taper** to topography.
+10. Extract and select **zero-level coastline contours**.
+11. Define station coordinates:
+    - from the existing `mt` structure, or
+    - from an automatically generated grid.
+12. Optionally generate **support points around stations**.
+13. Export **Topography.txt** and **Coordinates.txt**.
+14. Define background resistivity and build the **thin-layer conductance**.
+15. Optionally include **sediment conductance**.
+16. Export **ThinLayer.txt** and, if selected, **Coastline.txt**.
+17. Save or print an **info** summary.
+
+----
+
+
+## Tutorial 1 — Start the workflow and select the project folder
+
+Run the function from MATLAB:
+
+```matlab
+MT2COMSOL_TopoBathy
+```
+
+If no input argument is provided, the routine first asks you to select the **project folder** where all output files will be saved.
+
+```{tip}
+Create one dedicated folder per COMSOL model setup. This keeps the exported ASCII files, station files, and metadata together.
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_01_project_folder.png
+:alt: Select project folder
+:width: 70%
+:align: center
+```
+
+----
+
+
+## Tutorial 2 — Choose whether to plot diagnostic results
+
+After selecting the project folder, the routine asks:
+
+- **Do you want to plot the results?**
+
+If you choose:
+
+- **Yes**: the workflow generates multiple diagnostic figures during DEM preparation, conductance generation, and contour selection.
+- **No**: the workflow still runs, but no intermediate figures are shown.
+
+```{note}
+For first-time use, it is strongly recommended to choose **Yes**. The diagnostic plots are useful for checking DEM orientation, coastline extraction, station positions, and conductance maps.
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_02_plot_option.png
+:alt: Plot option dialog
+:width: 45%
+:align: center
+```
+
+----
+
+
+## Tutorial 3 — Select the DEM source
+
+The next dialog lets you select the DEM source file type:
+
+- **GeoTIF**
+- **Matlab DEM**
+
+### Option A — GeoTIF
+
+Choose this option if your terrain model is stored as one or more GeoTIFF files.
+
+The routine then asks you to select:
+
+1. a **low-resolution GeoTIFF**,
+2. optionally a **high-resolution GeoTIFF**.
+
+For each DEM, the routine also asks whether:
+
+- topography should be preserved,
+- bathymetry should be preserved.
+
+### Option B — Matlab DEM
+
+Choose this option if you already have a MATLAB `.mat` file containing a variable named `dem`.
+
+The structure is expected to contain fields such as:
+
+- `HRdem`
+- `unit`
+- `R`
+- `LAT`
+- `LON`
+
+```{warning}
+If the selected MAT-file does not contain a variable named `dem`, the workflow stops and shows an error dialog.
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_03_dem_source.png
+:alt: DEM source selection
+:width: 45%
+:align: center
+```
+
+----
+
+
+## Tutorial 4 — Load the low-resolution DEM
+
+The low-resolution DEM defines the outer modelling region.
+
+After choosing the file, the routine:
+
+- reads the raster,
+- fills missing values,
+- optionally suppresses topography and/or bathymetry,
+- applies Gaussian smoothing,
+- converts coordinates to a centered Cartesian grid in kilometers.
+
+If plotting is enabled, the DEM is displayed as a topobathymetry map.
+
+```{image} ../_static/images/mt2comsol/topobathy_04_lr_dem.png
+:alt: Low-resolution DEM
+:width: 80%
+:align: center
+```
+
+```{note}
+The low-resolution DEM is always required in the GeoTIFF workflow. It defines the background domain even when a high-resolution DEM is also used.
+```
+
+----
+
+
+## Tutorial 5 — Optionally load the high-resolution DEM
+
+If you are working with a region of special interest, you can also load a **high-resolution DEM**.
+
+This inner DEM is merged with the low-resolution DEM during the final-domain construction step.
+
+Typical use cases include:
+
+- volcanic edifices,
+- coastal sectors with sharp bathymetric gradients,
+- local high-priority target areas around MT sites.
+
+The routine merges the low- and high-resolution DEMs on a combined grid using scattered interpolation.
+
+```{image} ../_static/images/mt2comsol/topobathy_05_hr_dem.png
+:alt: High-resolution DEM
+:width: 80%
+:align: center
+```
+
+```{tip}
+Use the high-resolution DEM only where it adds real value. Very large HR domains increase memory usage and may not improve the COMSOL model significantly.
+```
+
+----
+
+
+## Tutorial 6 — Optionally load an MT site variable
+
+The routine next asks whether you want to load an existing MT site variable from a MAT-file.
+
+If the selected file contains a variable named `mt`, the station coordinates are extracted and used directly.
+
+If no MT structure is provided, the routine will later ask you to generate a station grid automatically.
+
+```{image} ../_static/images/mt2comsol/topobathy_06_mt_structure.png
+:alt: MT structure selection
+:width: 70%
+:align: center
+```
+
+```{note}
+When an `mt` structure is used, station elevations are computed by interpolating the final DEM at the station positions.
+```
+
+----
+
+
+## Tutorial 7 — Build the final DEM
+
+Once the DEM(s) and optional MT structure are loaded, the routine builds the **final DEM**.
+
+This includes:
+
+- selecting the reference center,
+- merging LR and HR DEMs if both exist,
+- rebuilding the grid,
+- converting it to centered Cartesian coordinates.
+
+The reference center is chosen as follows:
+
+- from the `mt` structure if MT sites were provided,
+- otherwise from the HR DEM center if an HR DEM exists,
+- otherwise from the LR DEM center.
+
+```{image} ../_static/images/mt2comsol/topobathy_07_final_dem_latlon.png
+:alt: Final DEM in geographic coordinates
+:width: 80%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_08_final_dem_xy.png
+:alt: Final DEM in centered Cartesian coordinates
+:width: 80%
+:align: center
+```
+
+----
+
+
+## Tutorial 8 — Optionally crop the DEM limits
+
+The routine asks:
+
+- **Change DEM limits?**
+
+If you choose **Yes**, you can enter:
+
+- `X min (km)`
+- `X max (km)`
+- `Y min (km)`
+- `Y max (km)`
+
+The DEM is then cropped to the closest available grid indices and all derived coordinate arrays are rebuilt.
+
+```{image} ../_static/images/mt2comsol/topobathy_09_crop_dem_dialog.png
+:alt: DEM cropping dialog
+:width: 55%
+:align: center
+```
+
+```{tip}
+Cropping is useful to remove irrelevant outer areas and reduce the size of the exported topography and conductance grids.
+```
+
+----
+
+
+## Tutorial 9 — Optionally taper topography radially
+
+The workflow then asks:
+
+- **Apply radial taper to topography?**
+
+If you choose **Yes**, the routine requests two radii:
+
+- **Inner radius**: full topography is preserved.
+- **Outer radius**: topography is forced to zero.
+
+A smooth cosine taper is applied only to **positive topography**.
+
+Bathymetry remains unchanged.
+
+```{image} ../_static/images/mt2comsol/topobathy_10_taper_dialog.png
+:alt: Topography taper dialog
+:width: 55%
+:align: center
+```
+
+```{note}
+This option is useful when you want to suppress distant topography gradually while preserving the central modelling area.
+```
+
+----
+
+
+## Tutorial 10 — Extract and select coastline contours
+
+The routine extracts zero-level contours from the DEM and opens a contour-selection workflow.
+
+Optional operations include:
+
+- removing contour points outside a radius,
+- resampling contour vertices at a chosen spacing,
+- selecting only the contours you want to keep.
+
+The selected contours can later be exported as:
+
+- `Coastline.txt`
+
+```{image} ../_static/images/mt2comsol/topobathy_11_contours_all.png
+:alt: All extracted zero-level contours
+:width: 85%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_12_contours_selected.png
+:alt: Selected zero-level contours
+:width: 85%
+:align: center
+```
+
+```{tip}
+If your DEM contains multiple coastlines or islands, this step lets you keep only the geometries that are relevant for your COMSOL model.
+```
+
+----
+
+
+## Tutorial 11 — Define station coordinates
+
+At this stage, the routine determines the station positions.
+
+### Case A — Existing MT structure
+
+If an `mt` variable was loaded:
+
+- station longitude/latitude are converted into centered Cartesian coordinates,
+- station elevations are interpolated from the DEM,
+- the coordinates are exported to `Coordinates.txt`.
+
+### Case B — Automatic station generation
+
+If no MT structure was loaded, the routine creates stations interactively.
+
+#### With a high-resolution DEM
+
+You define:
+
+- number of sites in **X**,
+- number of sites in **Y**,
+- buffer percentage inside the HR domain.
+
+#### Without a high-resolution DEM
+
+You define:
+
+- number of sites in **X**,
+- `X min`, `X max`,
+- number of sites in **Y**,
+- `Y min`, `Y max`.
+
+The generated coordinates are projected onto the DEM. Invalid sites are removed, and the resulting station structure is saved as:
+
+- `mt2comsol.mat`
+
+```{image} ../_static/images/mt2comsol/topobathy_13_station_generation.png
+:alt: Automatic station generation dialog
+:width: 60%
+:align: center
+```
+
+```{warning}
+Stations with invalid interpolated elevation, or stations that fall outside the DEM, are removed automatically.
+```
+
+----
+
+
+## Tutorial 12 — Optionally add support points around stations
+
+The routine then asks:
+
+- **Add support points around stations?**
+
+If you choose **Yes**, you define:
+
+- **Support radius (km)**
+- **Lateral spacing (km)**
+
+For each station, the routine generates a circular stencil of support points, projects them onto the DEM, removes invalid points, and appends them to the topography export.
+
+```{image} ../_static/images/mt2comsol/topobathy_14_support_points_dialog.png
+:alt: Support-point dialog
+:width: 55%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_15_support_points_map.png
+:alt: Station support points around MT sites
+:width: 80%
+:align: center
+```
+
+```{tip}
+Support points are useful when you want additional geometric control near MT sites without increasing the full DEM resolution everywhere.
+```
+
+----
+
+
+## Tutorial 13 — Export `Topography.txt` and `Coordinates.txt`
+
+After DEM, station, support-point, and coastline preparation, the routine writes:
+
+### `Topography.txt`
+
+This file contains:
+
+- the DEM grid points,
+- station coordinates,
+- optional support points,
+- optional coastline support points.
+
+Coordinates are exported in:
+
+- **meters** for X and Y,
+- **meters** for elevation.
+
+### `Coordinates.txt`
+
+This file contains the station coordinates used by the workflow.
+
+```{note}
+In the exported topography file, `DEM.dem0` is used. This means values below sea level are forced to zero in the topography export.
+```
+
+----
+
+
+## Tutorial 14 — Define the thin-layer conductance background
+
+The routine then asks for:
+
+- **Resistivity background (Ohm m)**
+
+This value controls the background thin-layer conductance over land.
+
+The current implementation uses:
+
+- ocean resistivity = `0.3 Ohm m`
+- thin-layer thickness = `100 m`
+
+The conductance map is built as:
+
+- **land**: `thinlayer / resistivity_bg`
+- **ocean**: `abs(bathymetry) / resistivity_ocean`
+
+```{image} ../_static/images/mt2comsol/topobathy_16_background_resistivity.png
+:alt: Background resistivity dialog
+:width: 50%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_17_conductance_base.png
+:alt: Base conductance map from background and ocean bathymetry
+:width: 80%
+:align: center
+```
+
+----
+
+
+## Tutorial 15 — Optionally include sediment conductance
+
+The workflow then asks:
+
+- **Include sediment thickness?**
+
+If you choose **Yes**, the routine reads a sediment-thickness raster and computes an additional conductance term.
+
+This sediment conductance is then combined with the existing ocean/background conductance.
+
+Diagnostic plots may include:
+
+- sediment thickness,
+- sediment conductance,
+- total conductance.
+
+```{image} ../_static/images/mt2comsol/topobathy_18_sediment_option.png
+:alt: Sediment option dialog
+:width: 45%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_19_sediment_thickness.png
+:alt: Sediment thickness map
+:width: 80%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_20_sediment_conductance.png
+:alt: Sediment conductance map
+:width: 80%
+:align: center
+```
+
+```{image} ../_static/images/mt2comsol/topobathy_21_total_conductance.png
+:alt: Total conductance map
+:width: 80%
+:align: center
+```
+
+```{warning}
+The sediment workflow assumes that the sediment raster is compatible with the DEM extent and coordinate system.
+```
+
+----
+
+
+## Tutorial 16 — Resample and export `ThinLayer.txt`
+
+Before export, the conductance model is resampled onto a coarser grid for COMSOL.
+
+The current implementation uses:
+
+- `NTX = 300`
+- `NTY = 300`
+
+If a high-resolution DEM exists, the conductance is sampled over both:
+
+- the outer box,
+- the inner high-resolution box.
+
+The combined conductance points are interpolated onto a merged grid and then written to:
+
+- `ThinLayer.txt`
+
+If coastline contours were selected, coastline points are appended using background conductance values.
+
+```{image} ../_static/images/mt2comsol/topobathy_22_thinlayer_resampled.png
+:alt: Resampled thin-layer conductance grid
+:width: 80%
+:align: center
+```
+
+----
+
+
+## Tutorial 17 — Review and save the info summary
+
+At the end of the workflow, the routine builds an `info` structure containing summary information such as:
+
+- outer-box size,
+- inner-box size,
+- reference latitude and longitude,
+- DEM elevation range,
+- background resistivity,
+- station metadata.
+
+You can then choose to:
+
+- save it as `info.mat`,
+- save it as `info.txt`,
+- print it to screen,
+- close without saving.
+
+```{image} ../_static/images/mt2comsol/topobathy_23_info_dialog.png
+:alt: Info summary dialog
+:width: 60%
+:align: center
+```
+
+----
+
+
+## Output files
+
+### `Topography.txt`
+
+Contains:
+
+- DEM topography grid,
+- station coordinates,
+- optional support points,
+- optional coastline points.
+
+### `ThinLayer.txt`
+
+Contains:
+
+- resampled thin-layer conductance values used in COMSOL.
+
+### `Coordinates.txt`
+
+Contains:
+
+- station coordinates exported in meters.
+
+### `Coastline.txt`
+
+Contains:
+
+- selected coastline points, if coastline export was enabled.
+
+### `mt2comsol.mat`
+
+Contains:
+
+- automatically generated `mt` structure,
+- reference latitude and longitude.
+
+### `info.mat` or `info.txt`
+
+Contains:
+
+- summary metadata of the generated modelling setup.
+
+----
+
+
+## Troubleshooting
+
+### “Selected MAT file does not contain variable `dem`”
+
+- Make sure the MATLAB DEM file contains a variable named `dem`.
+- Confirm that `dem` includes the expected fields.
+
+### “Selected MAT file does not contain variable `mt`”
+
+- Make sure the MT station file contains a variable named `mt`.
+- Otherwise, continue without it and let the routine create a station grid automatically.
+
+### No valid stations remain after projection onto the DEM
+
+- Check whether the station grid falls outside the DEM limits.
+- Check whether the generated stations are located below sea level.
+- Reduce the station window or adjust the HR-domain buffer.
+
+### Invalid taper radii
+
+- Make sure the outer radius is larger than the inner radius.
+- Both radii must be positive, and the inner radius can be zero.
+
+### DEM cropping gives an empty or unexpected result
+
+- Make sure the requested X and Y limits overlap the DEM.
+- Check the DEM coordinate orientation in the diagnostic figures.
+
+### Sediment conductance fails
+
+- Make sure `sediments_centered_0.tif` is available.
+- Confirm that the sediment raster overlaps the DEM geographic extent.
+
+### Exported files are not found in the project folder
+
+- Check write permissions for the selected folder.
+- If the main save attempt fails, the routine may fall back to the current MATLAB working directory.
+
+```{tip}
+For first-time setups, keep plotting enabled and save the final `info.txt`. This makes it much easier to trace domain size, reference coordinates, and output choices later.
+```
+
+
+
+
+
+
+
+
 
 ### Start COMSOL session
 
