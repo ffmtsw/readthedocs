@@ -255,6 +255,107 @@ This is intended for quick visual inspection of an existing DEM or GeoTIFF file 
 
 ----
 
+## Quick start (step-by-step tutorials)
+
+### Tutorial 1 — Define the frequency range and inspect skin depth
+
+1. Open the **Frequency and Skin Depth** panel.
+2. Enter:
+   - **Max. Frequency [Hz]**
+   - **Min. Frequency [Hz]**
+   - **Resistivity [Ohmm]**
+3. Inspect the automatically updated:
+   - **Skin depth min [km]**
+   - **Skin depth max [km]**
+
+```{tip}
+Use this first estimate as a planning guide for choosing reasonable domain extents before downloading the DEM.
+```
+
+### Tutorial 2 — Define the reference center and local model extents
+
+1. In **Reference Coordinates**, either:
+   - type **Central Latitude / Longitude**, or
+   - click **Use Center from MT Structure** and select a `*.mat` file containing `mt`
+2. In **Domain Extents**, define:
+   - **Easting min / max [km]**
+   - **Northing min / max [km]**
+3. Click **Calculate Limits**
+4. Inspect the resulting:
+   - geographic limits,
+   - and **Area [km2]**
+
+```{note}
+The geographic limits are computed from the local x/y box and the selected reference center. They are not meant to be edited directly from this panel.
+```
+
+### Tutorial 3 — Download a DEM automatically from the GUI
+
+1. Define the domain as described above.
+2. In **DEM Download Settings**, choose:
+   - **Format**
+   - **Resolution**
+   - whether **Plot DEM** should be enabled
+3. Click **Select Folder** and choose the project directory.
+4. Click **Download DEM**.
+5. If successful, the DEM is saved in the selected folder.
+
+```{warning}
+The automatic download workflow requires valid latitude/longitude limits and a valid destination folder.
+If either is missing, the GUI will stop and show a warning dialog.
+```
+
+### Tutorial 4 — Open the GMRT website and download manually
+
+1. In the **DEM** panel, click **Download DEM**.
+2. Your browser opens the **GMRT Map Tool**.
+3. Download the terrain product manually.
+4. Prefer **GeoTIFF** output for the standard MT2COMSOL workflow.
+
+### Tutorial 5 — Create COMSOL input files
+
+1. Make sure a valid **project folder** is selected.
+2. Click **Create Input Files**.
+3. Follow the dialogs of the input-file workflow.
+4. The project folder will be populated with COMSOL-ready ASCII files.
+
+```{tip}
+This is the main preparation step before building the COMSOL model itself.
+A separate tutorial should document this workflow in detail with screenshots and example files.
+```
+
+### Tutorial 6 — Start a COMSOL session
+
+1. Go to the **COMSOL Connection** panel.
+2. Move **Start COMSOL Session** to **On**.
+3. Wait for the server launch and MATLAB connection.
+4. Confirm that:
+   - the green lamp is active,
+   - and **Select MPH File** is enabled.
+
+```{note}
+If MATLAB is already connected to a COMSOL server, the GUI keeps the session active instead of failing.
+```
+
+### Tutorial 7 — Extract MT responses from an MPH file
+
+1. Start a valid COMSOL session.
+2. Click **Select MPH File**.
+3. Choose the COMSOL model file.
+4. Continue with the response-extraction workflow.
+
+```{warning}
+If the button is disabled, the COMSOL connection has not been initialized yet.
+Start the session first.
+```
+
+### Tutorial 8 — Open auxiliary tools
+
+- Use **Tools → Anisotropy Calculator** to open the anisotropy-tensor utility.
+- Use **Extras → Documentation** to open the online MT2COMSOL documentation.
+
+----
+
 
 ## COMSOL workflow
 
@@ -1066,109 +1167,6 @@ This step is intentionally blocked until a valid COMSOL session is active.
 That prevents users from attempting response extraction before the MATLAB–COMSOL connection is ready.
 
 ----
-
-
-## Quick start (step-by-step tutorials)
-
-### Tutorial 1 — Define the frequency range and inspect skin depth
-
-1. Open the **Frequency and Skin Depth** panel.
-2. Enter:
-   - **Max. Frequency [Hz]**
-   - **Min. Frequency [Hz]**
-   - **Resistivity [Ohmm]**
-3. Inspect the automatically updated:
-   - **Skin depth min [km]**
-   - **Skin depth max [km]**
-
-```{tip}
-Use this first estimate as a planning guide for choosing reasonable domain extents before downloading the DEM.
-```
-
-### Tutorial 2 — Define the reference center and local model extents
-
-1. In **Reference Coordinates**, either:
-   - type **Central Latitude / Longitude**, or
-   - click **Use Center from MT Structure** and select a `*.mat` file containing `mt`
-2. In **Domain Extents**, define:
-   - **Easting min / max [km]**
-   - **Northing min / max [km]**
-3. Click **Calculate Limits**
-4. Inspect the resulting:
-   - geographic limits,
-   - and **Area [km2]**
-
-```{note}
-The geographic limits are computed from the local x/y box and the selected reference center. They are not meant to be edited directly from this panel.
-```
-
-### Tutorial 3 — Download a DEM automatically from the GUI
-
-1. Define the domain as described above.
-2. In **DEM Download Settings**, choose:
-   - **Format**
-   - **Resolution**
-   - whether **Plot DEM** should be enabled
-3. Click **Select Folder** and choose the project directory.
-4. Click **Download DEM**.
-5. If successful, the DEM is saved in the selected folder.
-
-```{warning}
-The automatic download workflow requires valid latitude/longitude limits and a valid destination folder.
-If either is missing, the GUI will stop and show a warning dialog.
-```
-
-### Tutorial 4 — Open the GMRT website and download manually
-
-1. In the **DEM** panel, click **Download DEM**.
-2. Your browser opens the **GMRT Map Tool**.
-3. Download the terrain product manually.
-4. Prefer **GeoTIFF** output for the standard MT2COMSOL workflow.
-
-### Tutorial 5 — Create COMSOL input files
-
-1. Make sure a valid **project folder** is selected.
-2. Click **Create Input Files**.
-3. Follow the dialogs of the input-file workflow.
-4. The project folder will be populated with COMSOL-ready ASCII files.
-
-```{tip}
-This is the main preparation step before building the COMSOL model itself.
-A separate tutorial should document this workflow in detail with screenshots and example files.
-```
-
-### Tutorial 6 — Start a COMSOL session
-
-1. Go to the **COMSOL Connection** panel.
-2. Move **Start COMSOL Session** to **On**.
-3. Wait for the server launch and MATLAB connection.
-4. Confirm that:
-   - the green lamp is active,
-   - and **Select MPH File** is enabled.
-
-```{note}
-If MATLAB is already connected to a COMSOL server, the GUI keeps the session active instead of failing.
-```
-
-### Tutorial 7 — Extract MT responses from an MPH file
-
-1. Start a valid COMSOL session.
-2. Click **Select MPH File**.
-3. Choose the COMSOL model file.
-4. Continue with the response-extraction workflow.
-
-```{warning}
-If the button is disabled, the COMSOL connection has not been initialized yet.
-Start the session first.
-```
-
-### Tutorial 8 — Open auxiliary tools
-
-- Use **Tools → Anisotropy Calculator** to open the anisotropy-tensor utility.
-- Use **Extras → Documentation** to open the online MT2COMSOL documentation.
-
-----
-
 
 ## Troubleshooting
 
