@@ -269,7 +269,7 @@ Depending on the result, the GUI displays either:
 - a ready/active message, or
 - a warning indicating which component was not detected.
 
-### Create input files
+## Create input files
 
 The **Create Input Files** button launches the workflow to prepare topography, bathymetry, coastline, station coordinates, and thin-layer conductance files for COMSOL using the function `MT2COMSOL_TopoBathy.m`.
 This step is the bridge between DEM preparation and COMSOL model building.
@@ -298,9 +298,9 @@ It can also save:
 - `mt2comsol.mat` (if stations are generated automatically)
 - `info.mat` or `info.txt`
 
-#### Main features
+### Main features
 
-#### 1) DEM input from GeoTIFF or MATLAB DEM
+### 1) DEM input from GeoTIFF or MATLAB DEM
 
   The workflow supports two DEM entry paths:
 
@@ -309,7 +309,7 @@ It can also save:
 
   For GeoTIFF workflows, the routine expects at least one **low-resolution DEM** and optionally a **high-resolution DEM**.
 
-#### 2) Flexible topography / bathymetry handling
+### 2) Flexible topography / bathymetry handling
 
   For each DEM, the user can decide whether to preserve:
 
@@ -323,7 +323,7 @@ It can also save:
   - coastal domains,
   - ocean-influenced MT forward modelling.
 
-#### 3) Optional MT site input
+### 3) Optional MT site input
 
   The workflow can either:
 
@@ -332,7 +332,7 @@ It can also save:
 
   If no MT site variable is provided, the routine creates a synthetic site distribution and saves it as `mt2comsol.mat`.
 
-#### 4) DEM refinement and domain control
+### 4) DEM refinement and domain control
 
   The routine can:
   
@@ -341,12 +341,12 @@ It can also save:
   - apply a radial taper to positive topography,
   - convert geographic grids into centered Cartesian coordinates.
 
-#### 5) Coastline and support-point generation
+### 5) Coastline and support-point generation
 
   The workflow can extract zero-level contours from the DEM and export them as coastline support points.  
   It can also generate circular support-point clouds around stations to improve local topographic control near MT sites.
 
-#### 6) Thin-layer conductance generation
+### 6) Thin-layer conductance generation
 
   The routine builds a thin-layer conductance model that combines:  
   - a user-defined background resistivity,
