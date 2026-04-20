@@ -76,7 +76,11 @@ It focuses on:
 
 ## Main GUI components
 
-![MT2COMSOL main GUI](../_static/images/mt2comsol/mt2comsol_gui.png)
+```{image} ../_static/images/mt2comsol/mt2comsol_gui.png
+:alt: Main GUI Components
+:width: 80%
+:align: center
+```
 
 ### DEM and Model Domain Setup
 
@@ -556,12 +560,6 @@ If no input argument is provided, the routine first asks you to select the **pro
 Create one dedicated folder per COMSOL model setup. This keeps the exported ASCII files, station files, and metadata together.
 ```
 
-```{image} ../_static/images/mt2comsol/topobathy_01_project_folder.png
-:alt: Select project folder
-:width: 70%
-:align: center
-```
-
 ----
 
 
@@ -578,12 +576,6 @@ If you choose:
 
 ```{note}
 For first-time use, it is strongly recommended to choose **Yes**. The diagnostic plots are useful for checking DEM orientation, coastline extraction, station positions, and conductance maps.
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_02_plot_option.png
-:alt: Plot option dialog
-:width: 45%
-:align: center
 ```
 
 ----
@@ -624,12 +616,6 @@ The structure is expected to contain fields such as:
 
 ```{warning}
 If the selected MAT-file does not contain a variable named `dem`, the workflow stops and shows an error dialog.
-```
-
-```{image} ../_static/images/mt2comsol/topobathy_03_dem_source.png
-:alt: DEM source selection
-:width: 45%
-:align: center
 ```
 
 ----
@@ -697,11 +683,6 @@ If the selected file contains a variable named `mt`, the station coordinates are
 
 If no MT structure is provided, the routine will later ask you to generate a station grid automatically.
 
-```{image} ../_static/images/mt2comsol/topobathy_06_mt_structure.png
-:alt: MT structure selection
-:width: 70%
-:align: center
-```
 
 ```{note}
 When an `mt` structure is used, station elevations are computed by interpolating the final DEM at the station positions.
@@ -757,7 +738,7 @@ If you choose **Yes**, you can enter:
 
 The DEM is then cropped to the closest available grid indices and all derived coordinate arrays are rebuilt.
 
-```{image} ../_static/images/mt2comsol/topobathy_09_crop_dem_dialog.png
+```{image} ../_static/images/mt2comsol/mt2comsol_crop_dem_dialog.png
 :alt: DEM cropping dialog
 :width: 55%
 :align: center
@@ -776,6 +757,12 @@ The workflow then asks:
 
 - **Apply radial taper to topography?**
 
+```{image} ../_static/images/mt2comsol/mt2comsol_taper_dialog.png
+:alt: Topography taper dialog
+:width: 55%
+:align: center
+```
+
 If you choose **Yes**, the routine requests two radii:
 
 - **Inner radius**: full topography is preserved.
@@ -785,14 +772,14 @@ A smooth cosine taper is applied only to **positive topography**.
 
 Bathymetry remains unchanged.
 
-```{image} ../_static/images/mt2comsol/topobathy_10_taper_dialog.png
-:alt: Topography taper dialog
+```{image} ../_static/images/mt2comsol/mt2comsol_taper_window.png
+:alt: Topography taper window
 :width: 55%
 :align: center
 ```
 
 ```{note}
-This option is useful when you want to suppress distant topography gradually while preserving the central modelling area.
+This option is useful when you want to suppress distant topography gradually while preserving the central modeling area.
 ```
 
 ----
@@ -867,12 +854,6 @@ You define:
 The generated coordinates are projected onto the DEM. Invalid sites are removed, and the resulting station structure is saved as:
 
 - `mt2comsol.mat`
-
-```{image} ../_static/images/mt2comsol/topobathy_13_station_generation.png
-:alt: Automatic station generation dialog
-:width: 60%
-:align: center
-```
 
 ```{warning}
 Stations with invalid interpolated elevation, or stations that fall outside the DEM, are removed automatically.
@@ -960,7 +941,7 @@ The conductance map is built as:
 - **land**: `thinlayer / resistivity_bg`
 - **ocean**: `abs(bathymetry) / resistivity_ocean`
 
-```{image} ../_static/images/mt2comsol/topobathy_16_background_resistivity.png
+```{image} ../_static/images/mt2comsol/mt2comsol_background_resistivity.png
 :alt: Background resistivity dialog
 :width: 50%
 :align: center
@@ -991,7 +972,7 @@ Diagnostic plots may include:
 - sediment conductance,
 - total conductance.
 
-```{image} ../_static/images/mt2comsol/topobathy_18_sediment_option.png
+```{image} ../_static/images/mt2comsol/mt2comsol_option_sediment.png
 :alt: Sediment option dialog
 :width: 45%
 :align: center
@@ -1076,7 +1057,7 @@ You can then choose to:
 - print it to screen,
 - close without saving.
 
-```{image} ../_static/images/mt2comsol/topobathy_23_info_dialog.png
+```{image} ../_static/images/mt2comsol/mt2comsol_window_info.png
 :alt: Info summary dialog
 :width: 60%
 :align: center
