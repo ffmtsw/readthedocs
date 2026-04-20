@@ -80,6 +80,7 @@ It focuses on:
 :alt: Main GUI Components
 :width: 80%
 :align: center
+
 ```
 
 ### DEM and Model Domain Setup
