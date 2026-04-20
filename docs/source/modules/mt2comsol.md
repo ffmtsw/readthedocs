@@ -864,7 +864,7 @@ If you choose **Yes**, you define:
 For each station, the routine generates a circular stencil of support points, projects them onto the DEM, removes invalid points, and appends them to the topography export.
 
 <p align="center">
-  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours_all.png"
+  <img src="../_static/images/mt2comsol/mt2comsol_option_support_points.png"
        alt="Support-point dialog"
        width="55%">
 </p>
@@ -1018,11 +1018,6 @@ The combined conductance points are interpolated onto a merged grid and then wri
 
 If coastline contours were selected, coastline points are appended using background conductance values.
 
-<p align="center">
-  <img src="../_static/images/mt2comsol/mt2comsol_plot_thinlayer_resample.png"
-       alt="Resampled thin-layer conductance grid"
-       width="80%">
-</p>
 
 ----
 
