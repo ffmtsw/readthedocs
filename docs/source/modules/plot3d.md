@@ -1,3 +1,7 @@
 # Plot3D
 
-![Main GUI Components](../_static/images/mt2comsol/mt2comsol_gui.png){width=80% align=center}
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_gui.png"
+       alt="Main GUI Components"
+       width="80%">
+</p>
