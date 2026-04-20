@@ -107,3 +107,5 @@ myst_enable_extensions = [
     "html_image",   # Converts isolated raw <img> tags into Sphinx image nodes.
     "attrs_inline", # Enables inline attribute syntax like {#id .class}.
 ]
+
+print(">>> FFMT conf.py loaded <<<")
