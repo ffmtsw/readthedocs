@@ -79,7 +79,7 @@ It focuses on:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_gui.png"
        alt="Main GUI Components"
-       width="80%">
+       width="100%">
 </p>
 
 ### DEM and Model Domain Setup
@@ -638,7 +638,7 @@ If plotting is enabled, the DEM is displayed as a topobathymetry map.
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_lr_dem.png"
        alt="Low-resolution DEM"
-       width="80%">
+       width="70%">
 </p>
 
 ```{note}
@@ -665,7 +665,7 @@ The routine merges the low- and high-resolution DEMs on a combined grid using sc
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_hr_dem.png"
        alt="High-resolution DEM"
-       width="80%">
+       width="70%">
 </p>
 
 ```{tip}
@@ -711,7 +711,7 @@ The reference center is chosen as follows:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_final_xy.png"
        alt="Final DEM in centered Cartesian coordinates"
-       width="80%">
+       width="70%">
 </p>
 
 ----
@@ -735,7 +735,7 @@ The DEM is then cropped to the closest available grid indices and all derived co
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_window_crop_dem.png"
        alt="DEM cropping dialog"
-       width="55%">
+       width="40%">
 </p>
 
 ```{tip}
@@ -754,7 +754,7 @@ The workflow then asks:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_option_taper.png"
        alt="Topography taper dialog"
-       width="55%">
+       width="40%">
 </p>
 
 If you choose **Yes**, the routine requests two radii:
@@ -769,7 +769,7 @@ Bathymetry remains unchanged.
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_window_taper.png"
        alt="Topography taper window"
-       width="55%">
+       width="40%">
 </p>
 
 ```{note}
@@ -796,7 +796,7 @@ The selected contours can later be exported as:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_contours.png"
        alt="All extracted zero-level contours"
-       width="85%">
+       width="70%">
 </p>
 
 ```{tip}
@@ -866,13 +866,13 @@ For each station, the routine generates a circular stencil of support points, pr
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_option_support_points.png"
        alt="Support-point dialog"
-       width="55%">
+       width="40%">
 </p>
 
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_window_support_points.png"
        alt="Station support points around MT sites"
-       width="80%">
+       width="40%">
 </p>
 
 ```{tip}
@@ -932,13 +932,13 @@ The conductance map is built as:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_window_bgr.png"
        alt="Background resistivity dialog"
-       width="50%">
+       width="40%">
 </p>
 
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_conductance_from_dem.png"
        alt="Base conductance map from background and ocean bathymetry"
-       width="80%">
+       width="70%">
 </p>
 
 ----
@@ -963,25 +963,25 @@ Diagnostic plots may include:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_option_sediment.png"
        alt="Sediment option dialog"
-       width="45%">
+       width="40%">
 </p>
 
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_sediment_thickness.png"
        alt="Sediment thickness map"
-       width="80%">
+       width="70%">
 </p>
 
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_conductance_from_sediment.png"
        alt="Sediment conductance map"
-       width="80%">
+       width="70%">
 </p>
 
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_conductance_total.png"
        alt="Total conductance map"
-       width="80%">
+       width="70%">
 </p>
 
 ```{warning}
@@ -1043,7 +1043,7 @@ You can then choose to:
 <p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_option_info.png"
        alt="Info summary dialog"
-       width="60%">
+       width="40%">
 </p>
 
 ### Start COMSOL session
