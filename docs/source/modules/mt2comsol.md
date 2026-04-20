@@ -709,12 +709,6 @@ The reference center is chosen as follows:
 - otherwise from the LR DEM center.
 
 <p align="center">
-  <img src="../_static/images/mt2comsol/mt2comsol_plot_final_latlong.png"
-       alt="Final DEM in geographic coordinates"
-       width="80%">
-</p>
-
-<p align="center">
   <img src="../_static/images/mt2comsol/mt2comsol_plot_final_xy.png"
        alt="Final DEM in centered Cartesian coordinates"
        width="80%">
@@ -800,14 +794,8 @@ The selected contours can later be exported as:
 - `Coastline.txt`
 
 <p align="center">
-  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours_all.png"
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours.png"
        alt="All extracted zero-level contours"
-       width="85%">
-</p>
-
-<p align="center">
-  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours_selected.png"
-       alt="Selected zero-level contours"
        width="85%">
 </p>
 
