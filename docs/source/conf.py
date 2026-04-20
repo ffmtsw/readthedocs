@@ -30,7 +30,8 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_design",
 ]
-
+myst_commonmark_only = False
+myst_gfm_only = False
 
 # ----------------------------------------------------------------------------
 # Template and source exclusions
