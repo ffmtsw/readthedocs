@@ -76,12 +76,11 @@ It focuses on:
 
 ## Main GUI components
 
-```{image} ../_static/images/mt2comsol/mt2comsol_gui.png
-:alt: Main GUI Components
-:width: 80%
-:align: center
-
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_gui.png"
+       alt="Main GUI Components"
+       width="80%">
+</p>
 
 ### DEM and Model Domain Setup
 
@@ -636,11 +635,11 @@ After choosing the file, the routine:
 
 If plotting is enabled, the DEM is displayed as a topobathymetry map.
 
-```{image} ../_static/images/mt2comsol/topobathy_04_lr_dem.png
-:alt: Low-resolution DEM
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_lr_dem.png"
+       alt="Low-resolution DEM"
+       width="80%">
+</p>
 
 ```{note}
 The low-resolution DEM is always required in the GeoTIFF workflow. It defines the background domain even when a high-resolution DEM is also used.
@@ -663,11 +662,11 @@ Typical use cases include:
 
 The routine merges the low- and high-resolution DEMs on a combined grid using scattered interpolation.
 
-```{image} ../_static/images/mt2comsol/topobathy_05_hr_dem.png
-:alt: High-resolution DEM
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_hr_dem.png"
+       alt="High-resolution DEM"
+       width="80%">
+</p>
 
 ```{tip}
 Use the high-resolution DEM only where it adds real value. Very large HR domains increase memory usage and may not significantly improve the COMSOL model.
@@ -709,17 +708,17 @@ The reference center is chosen as follows:
 - otherwise from the HR DEM center if an HR DEM exists,
 - otherwise from the LR DEM center.
 
-```{image} ../_static/images/mt2comsol/topobathy_07_final_dem_latlon.png
-:alt: Final DEM in geographic coordinates
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_final_latlong.png"
+       alt="Final DEM in geographic coordinates"
+       width="80%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_08_final_dem_xy.png
-:alt: Final DEM in centered Cartesian coordinates
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_final_xy.png"
+       alt="Final DEM in centered Cartesian coordinates"
+       width="80%">
+</p>
 
 ----
 
@@ -739,11 +738,11 @@ If you choose **Yes**, you can enter:
 
 The DEM is then cropped to the closest available grid indices and all derived coordinate arrays are rebuilt.
 
-```{image} ../_static/images/mt2comsol/mt2comsol_crop_dem_dialog.png
-:alt: DEM cropping dialog
-:width: 55%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_window_crop_dem.png"
+       alt="DEM cropping dialog"
+       width="55%">
+</p>
 
 ```{tip}
 Cropping is useful to remove irrelevant outer areas and reduce the size of the exported topography and conductance grids.
@@ -758,11 +757,11 @@ The workflow then asks:
 
 - **Apply radial taper to topography?**
 
-```{image} ../_static/images/mt2comsol/mt2comsol_taper_dialog.png
-:alt: Topography taper dialog
-:width: 55%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_option_taper.png"
+       alt="Topography taper dialog"
+       width="55%">
+</p>
 
 If you choose **Yes**, the routine requests two radii:
 
@@ -773,11 +772,11 @@ A smooth cosine taper is applied only to **positive topography**.
 
 Bathymetry remains unchanged.
 
-```{image} ../_static/images/mt2comsol/mt2comsol_taper_window.png
-:alt: Topography taper window
-:width: 55%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_window_taper.png"
+       alt="Topography taper window"
+       width="55%">
+</p>
 
 ```{note}
 This option is useful when you want to suppress distant topography gradually while preserving the central modeling area.
@@ -800,17 +799,17 @@ The selected contours can later be exported as:
 
 - `Coastline.txt`
 
-```{image} ../_static/images/mt2comsol/topobathy_11_contours_all.png
-:alt: All extracted zero-level contours
-:width: 85%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours_all.png"
+       alt="All extracted zero-level contours"
+       width="85%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_12_contours_selected.png
-:alt: Selected zero-level contours
-:width: 85%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours_selected.png"
+       alt="Selected zero-level contours"
+       width="85%">
+</p>
 
 ```{tip}
 If your DEM contains multiple coastlines or islands, this step lets you keep only the geometries that are relevant for your COMSOL model.
@@ -876,17 +875,17 @@ If you choose **Yes**, you define:
 
 For each station, the routine generates a circular stencil of support points, projects them onto the DEM, removes invalid points, and appends them to the topography export.
 
-```{image} ../_static/images/mt2comsol/topobathy_14_support_points_dialog.png
-:alt: Support-point dialog
-:width: 55%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_contours_all.png"
+       alt="Support-point dialog"
+       width="55%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_15_support_points_map.png
-:alt: Station support points around MT sites
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_window_support_points.png"
+       alt="Station support points around MT sites"
+       width="80%">
+</p>
 
 ```{tip}
 Support points are useful when you want additional geometric control near MT sites without increasing the full DEM resolution everywhere.
@@ -942,17 +941,17 @@ The conductance map is built as:
 - **land**: `thinlayer / resistivity_bg`
 - **ocean**: `abs(bathymetry) / resistivity_ocean`
 
-```{image} ../_static/images/mt2comsol/mt2comsol_background_resistivity.png
-:alt: Background resistivity dialog
-:width: 50%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_window_bgr.png"
+       alt="Background resistivity dialog"
+       width="50%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_17_conductance_base.png
-:alt: Base conductance map from background and ocean bathymetry
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_conductance_from_dem.png"
+       alt="Base conductance map from background and ocean bathymetry"
+       width="80%">
+</p>
 
 ----
 
@@ -973,29 +972,29 @@ Diagnostic plots may include:
 - sediment conductance,
 - total conductance.
 
-```{image} ../_static/images/mt2comsol/mt2comsol_option_sediment.png
-:alt: Sediment option dialog
-:width: 45%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_option_sediment.png"
+       alt="Sediment option dialog"
+       width="45%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_19_sediment_thickness.png
-:alt: Sediment thickness map
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_sediment_thickness.png"
+       alt="Sediment thickness map"
+       width="80%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_20_sediment_conductance.png
-:alt: Sediment conductance map
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_conductance_from_sediment.png"
+       alt="Sediment conductance map"
+       width="80%">
+</p>
 
-```{image} ../_static/images/mt2comsol/topobathy_21_total_conductance.png
-:alt: Total conductance map
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_conductance_total.png"
+       alt="Total conductance map"
+       width="80%">
+</p>
 
 ```{warning}
 The sediment workflow assumes that the sediment raster is compatible with the DEM extent and coordinate system.
@@ -1031,11 +1030,11 @@ The combined conductance points are interpolated onto a merged grid and then wri
 
 If coastline contours were selected, coastline points are appended using background conductance values.
 
-```{image} ../_static/images/mt2comsol/topobathy_22_thinlayer_resampled.png
-:alt: Resampled thin-layer conductance grid
-:width: 80%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_plot_thinlayer_resample.png"
+       alt="Resampled thin-layer conductance grid"
+       width="80%">
+</p>
 
 ----
 
@@ -1058,11 +1057,11 @@ You can then choose to:
 - print it to screen,
 - close without saving.
 
-```{image} ../_static/images/mt2comsol/mt2comsol_window_info.png
-:alt: Info summary dialog
-:width: 60%
-:align: center
-```
+<p align="center">
+  <img src="../_static/images/mt2comsol/mt2comsol_option_info.png"
+       alt="Info summary dialog"
+       width="60%">
+</p>
 
 ### Start COMSOL session
 
